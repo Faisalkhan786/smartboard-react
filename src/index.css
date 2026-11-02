@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at center, #0f172a 0%, #020408 100%);
+  color: var(--text-white);
+}
+
+a {
+  color: inherit;
+}

@@ -1,0 +1,209 @@
+/* ===================== BOARD FRAME & STAGE ===================== */
+.stage-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.smartboard {
+  position: relative;
+  transform-origin: center center;
+  background-color: var(--board-bg);
+  background-image:
+    radial-gradient(rgba(56, 189, 248, 0.14) 1px, transparent 1px),
+    linear-gradient(to right, rgba(30, 41, 59, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 2px solid #263552;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 35px rgba(56, 189, 248, 0.08);
+  flex-shrink: 0;
+}
+.smartboard::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.slides-root {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 18px;
+  animation: slideSwap 0.32s ease;
+}
+/* subtle fade + lift when the slide changes (keyed remount replays this) */
+@keyframes slideSwap {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide { animation: none; }
+}
+
+/* ===================== CANVASES ===================== */
+.ink-canvas,
+.laser-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+.ink-canvas {
+  z-index: 30;
+}
+
+/* Pen-tip cursor (follows the pointer; replaces the system arrow) */
+.pen-tip-cursor {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  display: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+.laser-canvas {
+  z-index: 35;
+  pointer-events: none;
+}
+
+/* ===================== USER IMAGE ===================== */
+.user-image {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+.user-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 10px;
+}
+.user-image img.cropped { object-fit: cover; }
+.user-image.editing {
+  pointer-events: auto;
+  outline: 2px dashed var(--accent-cyan);
+  outline-offset: 3px;
+  cursor: grab;
+}
+.img-resize-handle {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 18px;
+  height: 18px;
+  background: var(--accent-cyan);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: nwse-resize;
+  display: none;
+}
+.user-image.editing .img-resize-handle {
+  display: block;
+}
+.user-image.crop-editing { cursor: move; }
+.user-image.crop-editing { outline: 1px solid rgba(255,255,255,.95); outline-offset: 0; box-shadow: 0 0 0 9999px rgba(2, 6, 23, .38); }
+.user-image.crop-editing img { cursor: move; }
+.crop-guides {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,.9);
+  background-image: linear-gradient(to right, transparent 33.2%, rgba(255,255,255,.65) 33.33%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.65) 66.67%, transparent 66.8%), linear-gradient(to bottom, transparent 33.2%, rgba(255,255,255,.65) 33.33%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.65) 66.67%, transparent 66.8%);
+  box-shadow: inset 0 0 0 1px rgba(15,23,42,.2);
+}
+.crop-guides span {
+  position: absolute;
+  left: 50%; top: 8px; transform: translateX(-50%);
+  padding: 4px 8px; border-radius: 999px;
+  color: white; background: rgba(15,23,42,.72);
+  font: 700 8px/1.2 var(--font-mono); letter-spacing: 1px; white-space: nowrap;
+}
+.user-image.crop-editing .img-resize-handle { display: block; }
+
+/* ===================== SAFE-ZONE OVERLAY ===================== */
+.safe-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+.yt-mask {
+  position: absolute;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(251, 113, 133, 0.22) 0 10px,
+    rgba(251, 113, 133, 0.07) 10px 20px
+  );
+  border: 1px solid rgba(251, 113, 133, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.yt-top {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.yt-right {
+  right: 0;
+}
+.yt-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.yt-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: rgba(254, 205, 211, 0.9);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 6px;
+}
+.yt-label.vert {
+  writing-mode: vertical-rl;
+}
+.safe-zone-box {
+  position: absolute;
+  border: 2px dashed rgba(52, 211, 153, 0.85);
+  border-radius: 6px;
+}
+.safe-label {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: rgba(52, 211, 153, 0.95);
+  background: rgba(6, 9, 17, 0.8);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
