@@ -149,13 +149,17 @@ export const work: Topic = {
               <DiagramCard>
                 <PositiveNegativeWork />
                 <DiagramCaption>
-                  <Kw c="emerald">+W same way</Kw>
+                  <Kw c="coral">up → −W</Kw>
                   <Dot />
-                  <Kw c="coral">−W opposite</Kw>
+                  <Kw c="emerald">down → +W</Kw>
                 </DiagramCaption>
               </DiagramCard>
             </SplitMain>
             <SplitAside>
+              <Hero eyebrow="WHAT THE SIGN MEANS" compact>
+                The <Kw c="yellow">+ or − sign</Kw> only tells you whether the force{' '}
+                <b>helped</b> the motion or <b>opposed</b> it — it's still just a number.
+              </Hero>
               <DefinitionStack>
                 <DefinitionCard index="1" variant="effort" title={<Kw c="emerald">POSITIVE WORK</Kw>}>
                   Force and displacement in the <b>same direction</b> — e.g. pushing a wheelchair
@@ -167,7 +171,7 @@ export const work: Topic = {
               </DefinitionStack>
             </SplitAside>
           </SlideSplit>
-          <Footnote>Lifting a dumbbell up = +ve work · lowering it down = −ve work</Footnote>
+          <Footnote>Throw a ball up — going up, gravity does −ve work; coming down, +ve work. Same force, opposite signs — because the displacement reversed.</Footnote>
         </>
       ),
     },

@@ -406,26 +406,33 @@ export const ZeroWorkWall = () => (
 /** Positive vs negative work shown with a football — force along the motion
  *  (+W) or opposing the motion (−W). */
 export const PositiveNegativeWork = () => (
-  <svg className="labeled-pulley" style={{ height: 180 }} viewBox="0 0 300 190" role="img" aria-label="Positive work: force along a football's motion. Negative work: force opposing its motion.">
-    {/* ===== POSITIVE (top) ===== */}
-    <circle cx="92" cy="50" r="18" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
-    <polygon points="92,44 97.7,48.1 95.5,54.8 88.5,54.8 86.3,48.1" fill="#334155" />
-    {/* force → (into ball) */}
-    <path d="M30 50 L70 50 M63 45 L71 50 L63 55" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-    <text x="46" y="40" textAnchor="middle" fill="#38bdf8" fontSize="13" fontWeight="900">F</text>
-    {/* displacement → */}
-    <path d="M78 84 L176 84 M169 79 L177 84 L169 89" fill="none" stroke="#facc15" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-    <text x="126" y="78" textAnchor="middle" fill="#facc15" fontSize="13" fontWeight="900">s</text>
-    <text x="252" y="58" textAnchor="middle" fill="#34d399" fontSize="18" fontWeight="900">+W</text>
-    {/* ===== NEGATIVE (bottom) ===== */}
-    <circle cx="92" cy="138" r="18" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
-    <polygon points="92,132 97.7,136.1 95.5,142.8 88.5,142.8 86.3,136.1" fill="#334155" />
-    {/* force ← (opposing) */}
-    <path d="M174 138 L118 138 M125 133 L117 138 L125 143" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-    <text x="150" y="130" textAnchor="middle" fill="#38bdf8" fontSize="13" fontWeight="900">F</text>
-    {/* displacement → (ball still moving) */}
-    <path d="M78 172 L176 172 M169 167 L177 172 L169 177" fill="none" stroke="#facc15" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-    <text x="126" y="166" textAnchor="middle" fill="#facc15" fontSize="13" fontWeight="900">s</text>
-    <text x="252" y="146" textAnchor="middle" fill="#fb7185" fontSize="18" fontWeight="900">−W</text>
+  <svg className="labeled-pulley" style={{ height: 180 }} viewBox="0 0 300 190" role="img" aria-label="A ball thrown up. Going up, displacement opposes gravity so work is negative. Coming down, displacement is along gravity so work is positive. Gravity is the same force throughout.">
+    {/* ground */}
+    <line x1="24" y1="176" x2="276" y2="176" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" />
+    {/* trajectory arc */}
+    <path d="M60 174 Q 150 14 240 174" fill="none" stroke="#475569" strokeWidth="2" strokeDasharray="5 6" />
+    {/* apex ball (v = 0) */}
+    <circle cx="150" cy="30" r="9" fill="#e2e8f0" stroke="#64748b" strokeWidth="2" />
+    <text x="150" y="19" textAnchor="middle" fill="#94a3b8" fontSize="11" fontWeight="800">v = 0</text>
+
+    {/* ===== GOING UP (left) → −W ===== */}
+    <circle cx="104" cy="104" r="14" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
+    {/* displacement up (yellow) */}
+    <path d="M82 128 L82 80 M76 88 L82 79 L88 88" fill="none" stroke="#facc15" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="82" y="72" textAnchor="middle" fill="#facc15" fontSize="12" fontWeight="900">s</text>
+    {/* gravity down (cyan) */}
+    <path d="M126 82 L126 126 M120 118 L126 127 L132 118" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="126" y="74" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">g</text>
+    <text x="104" y="156" textAnchor="middle" fill="#fb7185" fontSize="17" fontWeight="900">−W</text>
+
+    {/* ===== COMING DOWN (right) → +W ===== */}
+    <circle cx="196" cy="104" r="14" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
+    {/* displacement down (yellow) */}
+    <path d="M218 80 L218 128 M212 120 L218 129 L224 120" fill="none" stroke="#facc15" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="218" y="72" textAnchor="middle" fill="#facc15" fontSize="12" fontWeight="900">s</text>
+    {/* gravity down (cyan) */}
+    <path d="M174 82 L174 126 M168 118 L174 127 L180 118" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="174" y="74" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">g</text>
+    <text x="196" y="156" textAnchor="middle" fill="#34d399" fontSize="17" fontWeight="900">+W</text>
   </svg>
 )
