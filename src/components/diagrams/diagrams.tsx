@@ -550,3 +550,55 @@ export const PEtoKE = () => (
     <text x="152" y="154" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="900">high KE</text>
   </svg>
 )
+
+/* ---------------- Conservation of mechanical energy ---------------- */
+
+/** A falling ball: PE (violet) shrinks and KE (emerald) grows, but the total
+ *  bar stays the same height at every stage. */
+export const FreeFallEnergy = () => (
+  <svg className="labeled-pulley" style={{ height: 175 }} viewBox="0 0 300 190" role="img" aria-label="As a ball falls, potential energy shrinks and kinetic energy grows, but their total stays constant">
+    {/* legend */}
+    <rect x="96" y="11" width="10" height="10" rx="2" fill="#a78bfa" />
+    <text x="124" y="20" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="900">PE</text>
+    <rect x="152" y="11" width="10" height="10" rx="2" fill="#34d399" />
+    <text x="180" y="20" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="900">KE</text>
+    {/* ground */}
+    <line x1="18" y1="172" x2="282" y2="172" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    {/* fall trajectory */}
+    <path d="M60 50 L150 90 L240 152" fill="none" stroke="#475569" strokeWidth="2" strokeDasharray="5 5" />
+    {/* top — all PE */}
+    <circle cx="60" cy="50" r="13" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
+    <rect x="82" y="122" width="12" height="46" fill="#a78bfa" />
+    {/* middle — half/half */}
+    <circle cx="150" cy="90" r="13" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
+    <rect x="172" y="122" width="12" height="23" fill="#a78bfa" />
+    <rect x="172" y="145" width="12" height="23" fill="#34d399" />
+    {/* bottom — all KE */}
+    <circle cx="240" cy="152" r="13" fill="#e2e8f0" stroke="#64748b" strokeWidth="2.5" />
+    <rect x="262" y="122" width="12" height="46" fill="#34d399" />
+  </svg>
+)
+
+/** A simple pendulum: PE is greatest at the extremes, KE greatest at the mean
+ *  (lowest) position. */
+export const PendulumSwing = () => (
+  <svg className="labeled-pulley" style={{ height: 165 }} viewBox="0 0 260 185" role="img" aria-label="A pendulum: potential energy is greatest at the ends of the swing and kinetic energy greatest at the lowest point">
+    {/* support */}
+    <line x1="70" y1="24" x2="190" y2="24" stroke="#64748b" strokeWidth="5" strokeLinecap="round" />
+    <circle cx="130" cy="26" r="3" fill="#94a3b8" />
+    {/* swing arc */}
+    <path d="M70 120 Q 130 178 190 120" fill="none" stroke="#475569" strokeWidth="2" strokeDasharray="5 5" />
+    {/* left extreme — max PE */}
+    <line x1="130" y1="26" x2="70" y2="120" stroke="#cbd5e1" strokeWidth="2" />
+    <circle cx="70" cy="120" r="12" fill="#a78bfa" stroke="#8b5cf6" strokeWidth="2" />
+    <text x="66" y="104" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="900">PE max</text>
+    {/* right extreme — max PE (faded) */}
+    <line x1="130" y1="26" x2="190" y2="120" stroke="#cbd5e1" strokeWidth="2" opacity="0.4" />
+    <circle cx="190" cy="120" r="12" fill="#a78bfa" stroke="#8b5cf6" strokeWidth="2" opacity="0.45" />
+    <text x="194" y="104" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="900" opacity="0.6">PE max</text>
+    {/* mean position — max KE */}
+    <line x1="130" y1="26" x2="130" y2="150" stroke="#475569" strokeWidth="1.5" strokeDasharray="4 4" />
+    <circle cx="130" cy="150" r="12" fill="#34d399" stroke="#10b981" strokeWidth="2" />
+    <text x="130" y="178" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="900">KE max</text>
+  </svg>
+)

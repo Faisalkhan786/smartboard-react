@@ -8,6 +8,7 @@ import { workEnergyTheorem } from './workEnergyTheorem'
 import { work } from './work'
 import { kineticEnergy } from './kineticEnergy'
 import { potentialEnergy } from './potentialEnergy'
+import { conservationEnergy } from './conservationEnergy'
 
 /** Topic registry — add new topics here. */
 export const TOPICS: Topic[] = [
@@ -15,6 +16,7 @@ export const TOPICS: Topic[] = [
   workEnergyTheorem,
   kineticEnergy,
   potentialEnergy,
+  conservationEnergy,
   simpleMachine,
   pulley,
   inclinedPlane,
