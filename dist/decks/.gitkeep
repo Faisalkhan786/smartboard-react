@@ -1,2 +1,0 @@
-# Committed centre images live here, named <topicId>__<slideKey>.webp
-# They are referenced from src/content/imageManifest.ts and served at /decks/<file>.
