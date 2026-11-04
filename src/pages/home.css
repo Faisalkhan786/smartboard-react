@@ -190,7 +190,7 @@
 }
 
 /* Minimal round back affordance (icon only) above the chapter header */
-.topbar { width: 100%; max-width: 600px; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+.topbar { width: 100%; max-width: 600px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
 .back-btn {
   flex: 0 0 auto;
   display: inline-grid; place-items: center;

@@ -16,7 +16,6 @@ import {
   fileToDataURL,
   type SlideImage,
 } from '../components/smartboard/imageStore'
-import { exportImagesToRepo } from '../components/smartboard/exportImages'
 import { IMAGE_MANIFEST } from '../content/imageManifest'
 import {
   loadLayout,
@@ -185,7 +184,8 @@ export default function Deck() {
   }
 
   const imgK = imgKey(topic.id, activeKey)
-  const currentImage: SlideImage | undefined = images[imgK]
+  const rawImage = images[imgK]
+  const currentImage: SlideImage | undefined = rawImage && !rawImage.deleted ? rawImage : undefined
 
   const writeImages = (next: Record<string, SlideImage>) => {
     setImages(next)
@@ -199,7 +199,8 @@ export default function Deck() {
       setImagesLoaded(true)
     }
     const src = await fileToDataURL(file)
-    const prev = existingImages[imgK]
+    const prevRaw = existingImages[imgK]
+    const prev = prevRaw && !prevRaw.deleted ? prevRaw : undefined
     const img = new Image()
     img.onload = () => writeImages({
       ...existingImages,
@@ -231,9 +232,16 @@ export default function Deck() {
   )
 
   const onRemoveImage = () => {
-    if (!images[imgK]) return
+    const existing = images[imgK]
+    if (!existing || existing.deleted) return
     const next = { ...images }
-    delete next[imgK]
+    if (IMAGE_MANIFEST[imgK]) {
+      // committed image → leave a tombstone so the deletion can be saved to the repo
+      next[imgK] = { src: '', leftPct: 0, topPct: 0, widthPct: 0, deleted: true }
+    } else {
+      // local-only upload → just drop it
+      delete next[imgK]
+    }
     writeImages(next)
   }
 
@@ -361,7 +369,6 @@ export default function Deck() {
     onResetCrop: () => updateCurrentImage({ cropX: 50, cropY: 50, cropZoom: 1 }),
     onToggleImageEdit,
     onRemoveImage,
-    onExportImages: () => exportImagesToRepo(images),
     onToggleSolved: () => setSolved((v) => !v),
     onExport: () => exportPng(`${topic.id}_slide_${safeSlide + 1}.png`),
     format: formatId,

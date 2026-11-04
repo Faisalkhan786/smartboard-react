@@ -1,0 +1,73 @@
+.save-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.save-indicator-glyph { display: inline-grid; place-items: center; width: 14px; height: 14px; }
+
+/* ---- clean: faded + disabled, still visible ---- */
+.save-indicator.clean {
+  color: #64748b;
+  background: rgba(148, 163, 184, 0.06);
+  border-color: rgba(148, 163, 184, 0.14);
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ---- dirty: amber "action needed" ---- */
+.save-indicator.dirty {
+  color: #fbbf24;
+  background: color-mix(in srgb, #fbbf24 12%, transparent);
+  border-color: color-mix(in srgb, #fbbf24 42%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, #fbbf24 18%, transparent);
+  animation: save-pulse 1.8s ease-in-out infinite;
+}
+.save-indicator.dirty:hover {
+  background: color-mix(in srgb, #fbbf24 20%, transparent);
+  border-color: color-mix(in srgb, #fbbf24 70%, transparent);
+}
+.save-indicator.saving {
+  color: #fbbf24;
+  background: color-mix(in srgb, #fbbf24 10%, transparent);
+  border-color: color-mix(in srgb, #fbbf24 30%, transparent);
+  animation: none;
+  cursor: progress;
+}
+.save-indicator:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
+
+/* the pulsing status dot shown while dirty */
+.save-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 7px #fbbf24;
+}
+
+/* floating variant (Home) */
+.save-indicator.floating {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 60;
+  padding: 8px 14px;
+  font-size: 12px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45), 0 0 0 1px color-mix(in srgb, #fbbf24 22%, transparent);
+}
+
+@keyframes save-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px color-mix(in srgb, #fbbf24 18%, transparent); }
+  50% { box-shadow: 0 0 0 1px color-mix(in srgb, #fbbf24 40%, transparent), 0 0 14px color-mix(in srgb, #fbbf24 28%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .save-indicator.dirty { animation: none; }
+}

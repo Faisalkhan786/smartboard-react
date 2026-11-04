@@ -151,6 +151,13 @@ const ICONS: Record<string, ReactNode> = {
       <path d="M12 5 L5 12 L12 19" />
     </>
   ),
+  check: <path d="M20 6 L9 17 l-5 -5" />,
+  upload: (
+    <>
+      <path d="M12 20 V8 M7 13 l5 -5 5 5" />
+      <path d="M4 4 h16" />
+    </>
+  ),
 }
 
 export default function Icon({ name, size = 26 }: { name: string; size?: number }) {

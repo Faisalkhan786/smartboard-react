@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import type { PenMode } from '../components/smartboard/usePenEngine'
 import { FORMATS, type FormatId } from '../config/formats'
 import Icon from '../components/icons/Icon'
+import SaveImagesIndicator from '../components/SaveImagesIndicator'
 
 const COLORS = ['#facc15', '#38bdf8', '#fb7185', '#34d399', '#ffffff']
 
@@ -46,8 +47,6 @@ export interface ToolbarProps {
   onResetCrop: () => void
   onToggleImageEdit: () => void
   onRemoveImage: () => void
-  /** download committed images + manifest for the repo */
-  onExportImages: () => void
   onToggleSolved: () => void
   onExport: () => void
   format: FormatId
@@ -96,9 +95,12 @@ export default function Toolbar(p: ToolbarProps) {
         </button>
       )}
       <div>
-        <Link to={p.backTo} className="deck-back">
-          ← {p.backLabel}
-        </Link>
+        <div className="deck-back-row">
+          <Link to={p.backTo} className="deck-back">
+            ← {p.backLabel}
+          </Link>
+          <SaveImagesIndicator />
+        </div>
         <div className="deck-topic-head">
           <div className="deck-topic-icon">
             <Icon name={p.topicIcon} size={20} />
@@ -319,14 +321,6 @@ export default function Toolbar(p: ToolbarProps) {
             if (f) p.onImageFile(f)
           }}
         />
-        <button
-          className="ui-btn"
-          style={{ marginTop: 8, width: '100%', justifyContent: 'center', fontSize: 11 }}
-          data-tip="Download all images + manifest to commit into the repo (cross-device)"
-          onClick={p.onExportImages}
-        >
-          <Icon name="download" size={14} /> Save images to repo
-        </button>
       </div>
 
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>

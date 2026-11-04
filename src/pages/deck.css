@@ -137,13 +137,13 @@
   backdrop-filter: blur(16px);
   border: 1px solid #1e293b;
   border-radius: 18px;
-  padding: 16px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 9px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.85);
   z-index: 100;
-  max-height: 96vh;
+  max-height: 97vh;
   overflow-y: auto;
 }
 .sidebar::-webkit-scrollbar { width: 7px; }
@@ -157,29 +157,39 @@
   text-transform: uppercase;
   letter-spacing: 1.4px;
   color: #64748b;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* groups the sidebar into clusters: Slides | Draw | Board */
 .side-divider { flex: 0 0 auto; height: 1px; background: #1e293b; margin: 1px 0; }
 
 /* Back chip + topic header — mirrors the chapter page, themed by the topic accent */
+.deck-back-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
 .deck-back {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 5px;
   background: #162033;
   border: 1px solid #263552;
   color: #cbd5e1;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  padding: 7px 12px;
-  border-radius: 10px;
+  padding: 5px 10px;
+  border-radius: 9px;
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 .deck-back:hover { color: #fff; border-color: var(--topic-accent, var(--accent-cyan)); }
+
+/* compact the save indicator inside the tight sidebar row */
+.deck-back-row .save-indicator { font-size: 10px; padding: 5px 9px; }
 
 .deck-topic-head { display: flex; align-items: center; gap: 10px; }
 .deck-topic-icon {
@@ -240,7 +250,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  max-height: 102px; /* ~3 rows, then scroll */
+  max-height: 88px; /* ~2.5 rows, then scroll internally */
   overflow-y: auto;
   padding-right: 4px;
 }

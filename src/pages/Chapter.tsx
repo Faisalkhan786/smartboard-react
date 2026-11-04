@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import { CHAPTERS, chaptersInClass } from '../content/chapters'
 import { topicsInChapter } from '../content/topics'
 import Icon from '../components/icons/Icon'
+import SaveImagesIndicator from '../components/SaveImagesIndicator'
 import DeckRow from './DeckRow'
 import './home.css'
 
@@ -22,6 +23,7 @@ export default function Chapter() {
         <Link to="/" className="back-btn" aria-label="Back to all chapters" title="All chapters">
           <Icon name="back" size={18} />
         </Link>
+        <SaveImagesIndicator />
       </div>
 
       <header className="chapter-cover">

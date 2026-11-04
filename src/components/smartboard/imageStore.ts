@@ -9,6 +9,8 @@ export interface SlideImage {
   cropX?: number
   cropY?: number
   cropZoom?: number
+  /** tombstone: a committed image that was deleted, pending save-to-repo */
+  deleted?: boolean
 }
 
 type Store = Record<string, SlideImage>
@@ -88,9 +90,13 @@ function migrateKeys(store: Store): Store {
   return out
 }
 
+/** Fired after any write so the "unsaved images" indicators can re-check. */
+export const IMAGES_CHANGED_EVENT = 'smartboard:images-changed'
+
 export async function saveImages(images: Store): Promise<void> {
   const db = await openDb()
   await writeDb(db, images)
+  window.dispatchEvent(new Event(IMAGES_CHANGED_EVENT))
 }
 
 export const imgKey = (topicId: string, slideKey: string) => `${topicId}:${slideKey}`

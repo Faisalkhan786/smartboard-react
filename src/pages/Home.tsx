@@ -3,6 +3,7 @@ import { CLASSES } from '../content/classes'
 import { chaptersInClass } from '../content/chapters'
 import { topicsInChapter } from '../content/topics'
 import Card from './Card'
+import SaveImagesIndicator from '../components/SaveImagesIndicator'
 import './home.css'
 
 const CLASS_KEY = 'smartboard:class'
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <div className="home">
+      <SaveImagesIndicator floating />
       <div className="home-header">
         <div className="home-eyebrow">Physics Shorts</div>
         <h1 className="home-title">Smartboard Studio</h1>
