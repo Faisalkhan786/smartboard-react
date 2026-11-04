@@ -16,6 +16,8 @@ import {
   fileToDataURL,
   type SlideImage,
 } from '../components/smartboard/imageStore'
+import { exportImagesToRepo } from '../components/smartboard/exportImages'
+import { IMAGE_MANIFEST } from '../content/imageManifest'
 import {
   loadLayout,
   saveLayout,
@@ -69,7 +71,8 @@ export default function Deck() {
   useEffect(() => {
     let active = true
     loadImages().then((stored) => {
-      if (active) setImages(stored)
+      // Committed manifest = cross-device default; local IndexedDB overrides it.
+      if (active) setImages({ ...IMAGE_MANIFEST, ...stored })
     }).catch(() => {
       if (active) alert('Could not load saved images from browser storage.')
     }).finally(() => {
@@ -190,7 +193,7 @@ export default function Deck() {
   }
 
   const onImageFile = async (file: File) => {
-    const existingImages = imagesLoaded ? images : await loadImages()
+    const existingImages = imagesLoaded ? images : { ...IMAGE_MANIFEST, ...(await loadImages()) }
     if (!imagesLoaded) {
       setImages(existingImages)
       setImagesLoaded(true)
@@ -358,6 +361,7 @@ export default function Deck() {
     onResetCrop: () => updateCurrentImage({ cropX: 50, cropY: 50, cropZoom: 1 }),
     onToggleImageEdit,
     onRemoveImage,
+    onExportImages: () => exportImagesToRepo(images),
     onToggleSolved: () => setSolved((v) => !v),
     onExport: () => exportPng(`${topic.id}_slide_${safeSlide + 1}.png`),
     format: formatId,

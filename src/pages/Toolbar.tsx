@@ -46,6 +46,8 @@ export interface ToolbarProps {
   onResetCrop: () => void
   onToggleImageEdit: () => void
   onRemoveImage: () => void
+  /** download committed images + manifest for the repo */
+  onExportImages: () => void
   onToggleSolved: () => void
   onExport: () => void
   format: FormatId
@@ -317,6 +319,14 @@ export default function Toolbar(p: ToolbarProps) {
             if (f) p.onImageFile(f)
           }}
         />
+        <button
+          className="ui-btn"
+          style={{ marginTop: 8, width: '100%', justifyContent: 'center', fontSize: 11 }}
+          data-tip="Download all images + manifest to commit into the repo (cross-device)"
+          onClick={p.onExportImages}
+        >
+          <Icon name="download" size={14} /> Save images to repo
+        </button>
       </div>
 
       <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 8 }}>
