@@ -436,3 +436,117 @@ export const PositiveNegativeWork = () => (
     <text x="196" y="156" textAnchor="middle" fill="#34d399" fontSize="17" fontWeight="900">+W</text>
   </svg>
 )
+
+/* ---------------- Kinetic energy ---------------- */
+
+/** A mass m moving to the right with speed v — the energy of motion. */
+export const MovingBallKE = () => (
+  <svg className="labeled-pulley" style={{ height: 165 }} viewBox="0 0 300 180" role="img" aria-label="A mass m moving to the right with speed v — its kinetic energy">
+    {/* ground */}
+    <line x1="18" y1="150" x2="282" y2="150" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    {/* speed streaks behind the ball */}
+    <g stroke="#64748b" strokeWidth="3" strokeLinecap="round">
+      <path d="M38 80 H80" />
+      <path d="M30 95 H78" />
+      <path d="M38 110 H80" />
+    </g>
+    {/* the moving mass */}
+    <circle cx="115" cy="95" r="22" fill="#e2e8f0" stroke="#64748b" strokeWidth="3" />
+    <text x="115" y="101" textAnchor="middle" fill="#0f172a" fontSize="16" fontWeight="900">m</text>
+    {/* velocity arrow */}
+    <path d="M145 95 L216 95 M207 89 L217 95 L207 101" fill="none" stroke="#facc15" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="182" y="83" textAnchor="middle" fill="#facc15" fontSize="17" fontWeight="900">v</text>
+  </svg>
+)
+
+/** A windmill: moving air (wind) spins the blades — kinetic energy doing work. */
+export const WindmillKE = () => (
+  <svg className="labeled-pulley" style={{ height: 170 }} viewBox="0 0 260 190" role="img" aria-label="Wind spins a windmill — moving air does work">
+    {/* ground */}
+    <line x1="18" y1="168" x2="242" y2="168" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    {/* tower */}
+    <polygon points="117,168 131,168 127,74 121,74" fill="#64748b" />
+    {/* blades */}
+    <g stroke="#e2e8f0" strokeWidth="5" strokeLinecap="round">
+      <path d="M124 72 L124 30" />
+      <path d="M124 72 L86 94" />
+      <path d="M124 72 L162 94" />
+    </g>
+    <circle cx="124" cy="72" r="5" fill="#cbd5e1" />
+    {/* rotation hint */}
+    <path d="M150 40 A22 22 0 0 1 160 62 M156 54 L161 63 L166 55" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    {/* wind arrows from the left */}
+    <g stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M14 58 L74 58 M66 53 L75 58 L66 63" />
+      <path d="M14 92 L62 92 M54 87 L63 92 L54 97" />
+    </g>
+    <text x="40" y="44" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">wind</text>
+  </svg>
+)
+
+/* ---------------- Potential energy ---------------- */
+
+/** A mass m raised to height h above the ground — gravitational PE. */
+export const RaisedMassPE = () => (
+  <svg className="labeled-pulley" style={{ height: 170 }} viewBox="0 0 300 185" role="img" aria-label="A mass m raised to height h above the ground stores gravitational potential energy">
+    {/* ground */}
+    <line x1="18" y1="160" x2="282" y2="160" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    {/* starting position at the ground (dashed) */}
+    <rect x="150" y="116" width="50" height="42" rx="8" fill="none" stroke="#64748b" strokeWidth="2.5" strokeDasharray="6 5" />
+    {/* raised mass */}
+    <rect x="150" y="40" width="50" height="42" rx="8" fill="#a78bfa" />
+    <text x="175" y="67" textAnchor="middle" fill="#1e1b4b" fontSize="16" fontWeight="900">m</text>
+    {/* lift arrow */}
+    <path d="M225 150 L225 66 M219 76 L225 64 L231 76" fill="none" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="247" y="112" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">lift</text>
+    {/* height measurement h */}
+    <line x1="126" y1="82" x2="126" y2="158" stroke="#a78bfa" strokeWidth="2.5" strokeDasharray="5 4" />
+    <line x1="120" y1="82" x2="132" y2="82" stroke="#a78bfa" strokeWidth="2.5" />
+    <line x1="120" y1="158" x2="132" y2="158" stroke="#a78bfa" strokeWidth="2.5" />
+    <text x="112" y="124" textAnchor="middle" fill="#a78bfa" fontSize="15" fontWeight="900">h</text>
+  </svg>
+)
+
+/** A drawn bow storing elastic potential energy in its changed shape. */
+export const ElasticBowPE = () => (
+  <svg className="labeled-pulley" style={{ height: 160 }} viewBox="0 0 280 180" role="img" aria-label="A drawn bow stores elastic potential energy in its stretched shape">
+    {/* bow limb */}
+    <path d="M196 26 Q 108 95 196 164" fill="none" stroke="#a78bfa" strokeWidth="6" strokeLinecap="round" />
+    {/* bowstring pulled back to the nock */}
+    <path d="M196 26 L112 95 L196 164" fill="none" stroke="#cbd5e1" strokeWidth="2.5" />
+    {/* arrow */}
+    <path d="M112 95 L232 95 M224 89 L233 95 L224 101" fill="none" stroke="#facc15" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    {/* feathers */}
+    <path d="M112 95 L103 89 M112 95 L103 101" fill="none" stroke="#facc15" strokeWidth="3" strokeLinecap="round" />
+    {/* pull-back indicator */}
+    <path d="M150 128 L116 128 M124 123 L114 128 L124 133" fill="none" stroke="#38bdf8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="138" y="120" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">pull</text>
+  </svg>
+)
+
+/** A falling mass: high PE at the top converts to high KE at the bottom. */
+export const PEtoKE = () => (
+  <svg className="labeled-pulley" style={{ height: 170 }} viewBox="0 0 260 190" role="img" aria-label="A falling mass converts its potential energy at the top into kinetic energy at the bottom">
+    {/* ground */}
+    <line x1="18" y1="172" x2="242" y2="172" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    {/* fall path */}
+    <line x1="80" y1="62" x2="80" y2="128" stroke="#475569" strokeWidth="2" strokeDasharray="5 5" />
+    {/* top: high PE, at rest */}
+    <circle cx="80" cy="44" r="16" fill="#a78bfa" stroke="#8b5cf6" strokeWidth="2.5" />
+    <text x="80" y="22" textAnchor="middle" fill="#94a3b8" fontSize="11" fontWeight="800">v = 0</text>
+    <text x="80" y="49" textAnchor="middle" fill="#1e1b4b" fontSize="12" fontWeight="900">PE</text>
+    <text x="150" y="48" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="900">high PE</text>
+    {/* fall arrow */}
+    <path d="M80 64 L80 126 M74 118 L80 128 L86 118" fill="none" stroke="#facc15" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="98" y="100" textAnchor="middle" fill="#facc15" fontSize="11" fontWeight="900">fall</text>
+    {/* bottom: high KE, fast */}
+    <g stroke="#64748b" strokeWidth="2.5" strokeLinecap="round">
+      <path d="M34 150 H58" />
+      <path d="M38 140 H58" />
+      <path d="M38 160 H58" />
+    </g>
+    <circle cx="80" cy="150" r="16" fill="#34d399" stroke="#10b981" strokeWidth="2.5" />
+    <text x="80" y="155" textAnchor="middle" fill="#064e3b" fontSize="12" fontWeight="900">KE</text>
+    <text x="152" y="154" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="900">high KE</text>
+  </svg>
+)

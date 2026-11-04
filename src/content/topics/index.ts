@@ -6,11 +6,15 @@ import { lever } from './lever'
 import { movablePulley } from './movablePulley'
 import { workEnergyTheorem } from './workEnergyTheorem'
 import { work } from './work'
+import { kineticEnergy } from './kineticEnergy'
+import { potentialEnergy } from './potentialEnergy'
 
 /** Topic registry — add new topics here. */
 export const TOPICS: Topic[] = [
   work,
   workEnergyTheorem,
+  kineticEnergy,
+  potentialEnergy,
   simpleMachine,
   pulley,
   inclinedPlane,
