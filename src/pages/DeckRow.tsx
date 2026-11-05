@@ -10,10 +10,12 @@ interface Props {
   title: string
   tagline: string
   slides: number
+  /** word after the count — "slides" for decks, "questions" for quizzes */
+  countLabel?: string
 }
 
 /** A topic rendered as a compact "deck card" in a 2-column gallery. */
-export default function DeckRow({ to, ready, accent, icon, title, tagline, slides }: Props) {
+export default function DeckRow({ to, ready, accent, icon, title, tagline, slides, countLabel = 'slides' }: Props) {
   const style = { '--card-accent': accent } as CSSProperties
   const inner = (
     <>
@@ -22,7 +24,7 @@ export default function DeckRow({ to, ready, accent, icon, title, tagline, slide
           <Icon name={icon} size={15} />
         </span>
         <span className="deck-row-title">{title}</span>
-        <span className="deck-row-count">{ready ? `${slides} slides` : 'Soon'}</span>
+        <span className="deck-row-count">{ready ? `${slides} ${countLabel}` : 'Soon'}</span>
       </span>
       <span className="deck-row-tag">{tagline}</span>
     </>

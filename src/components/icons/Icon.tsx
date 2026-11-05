@@ -152,6 +152,7 @@ const ICONS: Record<string, ReactNode> = {
     </>
   ),
   check: <path d="M20 6 L9 17 l-5 -5" />,
+  cursor: <path d="M5 3 L5 19 L9.2 14.8 L12 21 L14.6 19.9 L11.8 13.8 L18 13.8 Z" />,
   upload: (
     <>
       <path d="M12 20 V8 M7 13 l5 -5 5 5" />

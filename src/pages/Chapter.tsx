@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom'
 import type { CSSProperties } from 'react'
 import { CHAPTERS, chaptersInClass } from '../content/chapters'
 import { topicsInChapter } from '../content/topics'
+import { quizzesInChapter } from '../content/quizzes'
 import Icon from '../components/icons/Icon'
 import SaveImagesIndicator from '../components/SaveImagesIndicator'
 import DeckRow from './DeckRow'
@@ -11,6 +12,7 @@ export default function Chapter() {
   const { chapterId } = useParams()
   const chapter = CHAPTERS.find((c) => c.id === chapterId)
   const topics = chapterId ? topicsInChapter(chapterId) : []
+  const quizzes = chapterId ? quizzesInChapter(chapterId) : []
   // chapter number within its own class
   const idxInClass = chapter ? chaptersInClass(chapter.classId).findIndex((c) => c.id === chapter.id) : -1
   const chapterNo = idxInClass >= 0 ? String(idxInClass + 1).padStart(2, '0') : '—'
@@ -61,6 +63,27 @@ export default function Chapter() {
           />
         ))}
       </div>
+
+      {quizzes.length > 0 && (
+        <>
+          <div className="section-label">Practice · {quizzes.length}</div>
+          <div className="deck-list">
+            {quizzes.map((qz) => (
+              <DeckRow
+                key={qz.id}
+                to={`/quiz/${qz.id}`}
+                ready={qz.count > 0}
+                accent={qz.accent}
+                icon={qz.icon}
+                title={qz.title}
+                tagline={qz.tagline}
+                slides={qz.count}
+                countLabel="questions"
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }
