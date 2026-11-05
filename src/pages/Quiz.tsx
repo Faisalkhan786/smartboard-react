@@ -14,6 +14,8 @@ const PEN_COLORS = ['#facc15', '#38bdf8', '#fb7185', '#34d399', '#f8fafc']
 const BOARD_W = 540
 const BOARD_H = 960
 const PEN_SIZE = 3
+// MCQ content accent — deliberately distinct from the decks' cyan.
+const CONTENT_ACCENT = '#8b5cf6'
 
 /** Pen-tip that follows the pointer (same behaviour as the Smartboard). */
 function PenCursor({ active, color, tool, scale }: { active: boolean; color: string; tool: Tool; scale: number }) {
@@ -59,8 +61,7 @@ function QuizView({ quiz }: { quiz: QuizData }) {
 
   const [idx, setIdx] = useState(0)
   const [attempt, setAttempt] = useState(0)
-  const [selected, setSelected] = useState<number | null>(null)
-  const [score, setScore] = useState(0)
+  const [answers, setAnswers] = useState<Record<number, number>>({}) // question index → chosen option
   const [finished, setFinished] = useState(false)
   const [scale, setScale] = useState(1)
 
@@ -74,7 +75,10 @@ function QuizView({ quiz }: { quiz: QuizData }) {
   const engine = usePenEngine(inkRef, laserRef, settingsRef)
 
   const current = quiz.questions[idx]
+  const selected = idx in answers ? answers[idx] : null
   const answered = selected !== null
+  const answeredCount = Object.keys(answers).length
+  const score = quiz.questions.reduce((n, q, i) => n + (answers[i] === q.answer ? 1 : 0), 0)
   const inkKey = `a${attempt}q${idx}` // per-question, per-attempt ink bucket
 
   // Fit the board EXACTLY like the deck (same left-sidebar reservation + 96%
@@ -98,9 +102,12 @@ function QuizView({ quiz }: { quiz: QuizData }) {
   }, [inkKey, engine])
 
   const pick = (i: number) => {
-    if (answered) return
-    setSelected(i)
-    if (i === current.answer) setScore((s) => s + 1)
+    if (answered) return // lock once answered
+    setAnswers((a) => ({ ...a, [idx]: i }))
+  }
+
+  const prev = () => {
+    if (idx > 0) setIdx((i) => i - 1)
   }
 
   const next = () => {
@@ -108,16 +115,13 @@ function QuizView({ quiz }: { quiz: QuizData }) {
       setFinished(true)
       return
     }
-    setIdx((i) => i + 1)
-    setSelected(null)
-    setTool('pointer')
+    setIdx((i) => i + 1) // unanswered → this is a skip; ink/answers persist per question
   }
 
   const restart = () => {
     setIdx(0)
     setAttempt((a) => a + 1)
-    setSelected(null)
-    setScore(0)
+    setAnswers({})
     setFinished(false)
     setTool('pointer')
   }
@@ -129,7 +133,7 @@ function QuizView({ quiz }: { quiz: QuizData }) {
 
   const sidebarStyle = { '--topic-accent': accent } as CSSProperties
   const boardStyle = {
-    '--quiz-accent': accent,
+    '--quiz-accent': CONTENT_ACCENT,
     width: BOARD_W,
     height: BOARD_H,
     transform: `scale(${scale})`,
@@ -227,6 +231,9 @@ function QuizView({ quiz }: { quiz: QuizData }) {
                 <div className="quiz-result-score">
                   You scored <strong>{score}</strong> / {total}
                 </div>
+                {total - answeredCount > 0 && (
+                  <div className="quiz-result-sub">{total - answeredCount} skipped</div>
+                )}
                 <div className="quiz-result-msg">{resultMsg}</div>
                 <div className="quiz-actions">
                   <button className="quiz-btn primary" onClick={restart}>
@@ -276,13 +283,14 @@ function QuizView({ quiz }: { quiz: QuizData }) {
                   )}
                 </div>
 
-                {answered && (
-                  <div className="quiz-actions">
-                    <button className="quiz-btn primary" onClick={next}>
-                      {idx >= total - 1 ? 'See result' : 'Next question'}
-                    </button>
-                  </div>
-                )}
+                <div className="quiz-nav-row">
+                  <button className="quiz-btn ghost" onClick={prev} disabled={idx === 0}>
+                    ← Previous
+                  </button>
+                  <button className="quiz-btn primary" onClick={next}>
+                    {idx >= total - 1 ? (answered ? 'See result' : 'Finish') : answered ? 'Next →' : 'Skip →'}
+                  </button>
+                </div>
               </>
             )}
           </div>

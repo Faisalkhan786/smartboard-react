@@ -64,6 +64,8 @@
   flex-direction: column;
   padding: 34px 30px;
   color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .quiz-head {
@@ -132,8 +134,9 @@
 
 .quiz-q {
   font-size: 25px;
-  font-weight: 700;
-  line-height: 1.34;
+  font-weight: 800;
+  line-height: 1.26;
+  letter-spacing: -0.4px;
   margin: 0 0 22px;
 }
 
@@ -155,6 +158,8 @@
   color: var(--text-white);
   font-family: inherit;
   font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, transform 0.08s;
 }
@@ -234,6 +239,18 @@
   gap: 12px;
   margin-top: 18px;
 }
+
+/* question nav (Previous / Skip-Next) — always visible, fixed spot */
+.quiz-nav-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.quiz-nav-row .quiz-btn {
+  flex: 1;
+  text-align: center;
+}
+
 .quiz-btn {
   padding: 14px 24px;
   border-radius: 13px;
@@ -245,15 +262,25 @@
   border: 1px solid var(--border-subtle);
   background: rgba(15, 23, 42, 0.6);
   color: var(--text-white);
-  transition: border-color 0.15s, filter 0.15s;
+  transition: border-color 0.15s, filter 0.15s, color 0.15s, opacity 0.15s;
 }
 .quiz-btn:hover { border-color: var(--quiz-accent); }
 .quiz-btn.primary {
   background: var(--quiz-accent);
   border-color: var(--quiz-accent);
-  color: #04121c;
+  color: #0d0320;
 }
-.quiz-btn.primary:hover { filter: brightness(1.08); }
+.quiz-btn.primary:hover { filter: brightness(1.1); }
+.quiz-btn.ghost {
+  background: rgba(2, 6, 16, 0.4);
+  color: var(--text-muted);
+}
+.quiz-btn.ghost:hover { color: var(--text-white); }
+.quiz-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
 
 /* ---- Result screen (inside the frame) ---- */
 .quiz-result {
@@ -282,6 +309,12 @@
 }
 .quiz-result-score { font-size: 20px; }
 .quiz-result-score strong { font-size: 24px; }
+.quiz-result-sub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
 .quiz-result-msg {
   font-size: 16px;
   color: var(--text-muted);
