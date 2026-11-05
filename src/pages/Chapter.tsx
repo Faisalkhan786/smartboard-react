@@ -52,12 +52,12 @@ export default function Chapter() {
           <DeckRow
             key={t.id}
             to={`/deck/${t.id}`}
-            ready={t.slides.length > 0}
+            ready={t.slideCount > 0}
             accent={t.accent}
             icon={t.icon}
             title={t.title}
             tagline={t.tagline}
-            slides={t.slides.length}
+            slides={t.slideCount}
           />
         ))}
       </div>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
-import { getTopic } from '../content/topics'
+import { loadTopic } from '../content/topics'
+import type { Topic } from '../content/types'
 import { CHAPTERS } from '../content/chapters'
 import { CLASSES } from '../content/classes'
 import { FORMATS, DEFAULT_FORMAT, type FormatId } from '../config/formats'
@@ -34,10 +35,7 @@ interface ComposedSlide {
   render: () => ReactNode
 }
 
-export default function Deck() {
-  const { topicId } = useParams()
-  const topic = getTopic(topicId)
-
+function DeckView({ topic }: { topic: Topic }) {
   const [slide, setSlide] = useState(0)
   const [mode, setMode] = useState<PenMode>('pen')
   const [color, setColor] = useState('#facc15')
@@ -178,10 +176,6 @@ export default function Deck() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [topic, engine, slideCount, toggleTools])
-
-  if (!topic) {
-    return <Navigate to="/" replace />
-  }
 
   const imgK = imgKey(topic.id, activeKey)
   const rawImage = images[imgK]
@@ -419,4 +413,39 @@ export default function Deck() {
       )}
     </div>
   )
+}
+
+function DeckLoading() {
+  return (
+    <div className="deck-loading" role="status" aria-live="polite">
+      <div className="deck-loading-inner">
+        <div className="deck-loading-ring" aria-hidden="true" />
+        <div className="deck-loading-text">Loading deck</div>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Route entry: resolve the topic for the URL, then render the deck. The topic's
+ * slide code is fetched on demand (undefined = still loading, null = unknown id).
+ */
+export default function Deck() {
+  const { topicId } = useParams()
+  const [topic, setTopic] = useState<Topic | null | undefined>(undefined)
+
+  useEffect(() => {
+    let active = true
+    setTopic(undefined)
+    loadTopic(topicId).then((t) => {
+      if (active) setTopic(t)
+    })
+    return () => {
+      active = false
+    }
+  }, [topicId])
+
+  if (topic === undefined) return <DeckLoading />
+  if (topic === null) return <Navigate to="/" replace />
+  return <DeckView topic={topic} />
 }

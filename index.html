@@ -10,9 +10,62 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Dark base so there's no white flash before React (and its CSS) loads. */
+      html, body { margin: 0; background: #060911; }
+
+      /* Boot splash — shown instantly from HTML, replaced the moment React
+         mounts into #root. Mirrors the in-app deck spinner. */
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(60% 50% at 50% 42%, rgba(56, 189, 248, 0.08), transparent 70%),
+          #060911;
+      }
+      #boot .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #boot .ring {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 3px solid rgba(56, 189, 248, 0.16);
+        border-top-color: #38bdf8;
+        box-shadow: 0 0 24px rgba(56, 189, 248, 0.22);
+        animation: boot-spin 0.75s linear infinite;
+      }
+      #boot .label {
+        margin-top: 20px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        animation: boot-pulse 1.4s ease-in-out infinite;
+      }
+      @keyframes boot-spin { to { transform: rotate(360deg); } }
+      @keyframes boot-pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        #boot .ring { animation-duration: 1.6s; }
+        #boot .label { animation: none; opacity: 0.75; }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="boot">
+        <div class="inner">
+          <div class="ring"></div>
+          <div class="label">Smartboard Studio</div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

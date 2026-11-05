@@ -382,3 +382,56 @@
   .deck-shell { padding: 0; gap: 0; }
   .sidebar { display: none; }
 }
+
+/* ===== Deck loading state (shown while a topic's slides are fetched) ===== */
+.deck-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(60% 50% at 50% 42%, rgba(56, 189, 248, 0.08), transparent 70%),
+    var(--board-bg);
+}
+
+.deck-loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.deck-loading-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid rgba(56, 189, 248, 0.16);
+  border-top-color: var(--accent-cyan);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.22);
+  animation: deck-spin 0.75s linear infinite;
+}
+
+.deck-loading-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  animation: deck-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes deck-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes deck-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-loading-ring { animation-duration: 1.6s; }
+  .deck-loading-text { animation: none; opacity: 0.75; }
+}
