@@ -105,6 +105,15 @@ export const imgKey = (topicId: string, slideKey: string) => `${topicId}:${slide
 export function fileToDataURL(file: File, max = 1400): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
+    reader.onerror = reject
+    // Animated formats (GIF) must stay raw: a <canvas> re-encode captures only
+    // the first frame and outputs a still WebP, killing the animation. Skip the
+    // downscale for these and keep the original bytes so the GIF keeps playing.
+    if (file.type === 'image/gif') {
+      reader.onload = (ev) => resolve(ev.target!.result as string)
+      reader.readAsDataURL(file)
+      return
+    }
     reader.onload = (ev) => {
       const img = new Image()
       img.onload = () => {
@@ -126,7 +135,6 @@ export function fileToDataURL(file: File, max = 1400): Promise<string> {
       img.onerror = reject
       img.src = ev.target!.result as string
     }
-    reader.onerror = reject
     reader.readAsDataURL(file)
   })
 }

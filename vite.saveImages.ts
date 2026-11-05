@@ -41,17 +41,23 @@ export function saveImagesPlugin(): Plugin {
             for (const key of Object.keys(images).sort()) {
               const img = images[key]
               if (img?.deleted) {
-                // tombstone — remove the committed file and omit from the manifest
+                // tombstone — remove the committed file (whatever its extension)
+                // and omit from the manifest
+                const base = baseFor(key)
                 try {
-                  fs.unlinkSync(path.join(decksDir, fileFor(key)))
-                  removed++
+                  for (const f of fs.readdirSync(decksDir)) {
+                    if (f.startsWith(base + '.')) {
+                      fs.unlinkSync(path.join(decksDir, f))
+                      removed++
+                    }
+                  }
                 } catch {
-                  /* file already gone */
+                  /* dir missing or file already gone */
                 }
                 continue
               }
               if (typeof img?.src === 'string' && img.src.startsWith('data:')) {
-                const file = fileFor(key)
+                const file = fileFor(key, img.src)
                 const b64 = img.src.slice(img.src.indexOf(',') + 1)
                 fs.writeFileSync(path.join(decksDir, file), Buffer.from(b64, 'base64'))
                 written++
@@ -85,9 +91,22 @@ interface SlideImageLike {
   [k: string]: unknown
 }
 
-/** `topicId:slideKey` → filesystem-safe filename for /public/decks/. */
-function fileFor(key: string) {
-  return `${key.replace(':', '__').replace(/[^a-zA-Z0-9_-]/g, '-')}.webp`
+const EXT_BY_MIME: Record<string, string> = { gif: 'gif', png: 'png', webp: 'webp', jpeg: 'jpg', jpg: 'jpg' }
+
+/** Image format → file extension, read from a data: URL (defaults to webp). */
+function extFromSrc(src?: string): string {
+  const m = src ? /^data:image\/([a-z0-9.+-]+)/i.exec(src) : null
+  return m ? EXT_BY_MIME[m[1].toLowerCase()] ?? 'webp' : 'webp'
+}
+
+/** The filename stem (no extension) for a slide's centre image. */
+function baseFor(key: string) {
+  return key.replace(':', '__').replace(/[^a-zA-Z0-9_-]/g, '-')
+}
+
+/** `topicId:slideKey` (+ its src, to pick the extension) → filename for /public/decks/. */
+function fileFor(key: string, src?: string) {
+  return `${baseFor(key)}.${extFromSrc(src)}`
 }
 
 function renderManifest(manifest: Record<string, SlideImageLike>) {

@@ -1,8 +1,21 @@
 import type { SlideImage } from './imageStore'
 
-/** `topicId:slideKey` → a filesystem-safe filename for /public/decks/. */
-export const deckFileFor = (key: string) =>
-  `${key.replace(':', '__').replace(/[^a-zA-Z0-9_-]/g, '-')}.webp`
+const EXT_BY_MIME: Record<string, string> = { gif: 'gif', png: 'png', webp: 'webp', jpeg: 'jpg', jpg: 'jpg' }
+
+/** Image format → file extension, read from a data: URL or committed path (defaults to webp). */
+function extFromSrc(src?: string): string {
+  if (!src) return 'webp'
+  const data = /^data:image\/([a-z0-9.+-]+)/i.exec(src)
+  if (data) return EXT_BY_MIME[data[1].toLowerCase()] ?? 'webp'
+  const ext = /\.([a-z0-9]+)$/i.exec(src) // already a /decks/<name>.<ext> path
+  return ext ? ext[1].toLowerCase() : 'webp'
+}
+
+/** The filename stem (no extension) for a slide's centre image. */
+const deckBaseFor = (key: string) => key.replace(':', '__').replace(/[^a-zA-Z0-9_-]/g, '-')
+
+/** `topicId:slideKey` (+ its src, to pick the extension) → filename for /public/decks/. */
+export const deckFileFor = (key: string, src?: string) => `${deckBaseFor(key)}.${extFromSrc(src)}`
 const fileFor = deckFileFor
 
 function triggerDownload(blob: Blob, name: string) {
@@ -81,7 +94,7 @@ function downloadForManualPlacement(images: Record<string, SlideImage>) {
     const img = images[key]
     if (img.deleted) continue // deleted image — omit from manifest (remove its file manually)
     if (img.src.startsWith('data:')) {
-      const name = fileFor(key)
+      const name = fileFor(key, img.src)
       triggerDownload(dataUrlToBlob(img.src), name)
       fileCount++
       manifest[key] = { ...img, src: `/decks/${name}` }

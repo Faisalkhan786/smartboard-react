@@ -13,9 +13,12 @@ function placement(img: SlideImage): string {
  * How many centre images are not yet committed to the repo?
  *
  * "unsaved" = a local (IndexedDB) image that has no committed manifest entry
- * yet (a fresh upload), or whose placement/crop differs from the committed one
- * (moved/cropped since it was saved). The `src` form is ignored, so an
- * already-saved image still stored locally as a data: URL is NOT flagged.
+ * yet (a fresh upload), still holds raw `data:` bytes not yet written to
+ * /decks/ (a fresh upload OR a replacement over an existing slot — e.g. a new
+ * GIF swapped onto a slide that already had a committed image), or whose
+ * placement/crop differs from the committed one (moved/cropped since saved).
+ * A saved image has its local src rewritten to `/decks/…`, so a lingering
+ * `data:` src always means there are bytes the repo doesn't have yet.
  */
 function countUnsaved(store: Record<string, SlideImage>): number {
   let n = 0
@@ -25,6 +28,7 @@ function countUnsaved(store: Record<string, SlideImage>): number {
     if (local.deleted) {
       if (committed) n++ // a committed image was deleted — deletion not saved yet
     } else if (!committed) n++ // never committed
+    else if (local.src.startsWith('data:')) n++ // raw bytes not yet in /decks/ (new or replaced)
     else if (placement(local) !== placement(committed)) n++ // moved/cropped
   }
   return n
@@ -66,7 +70,7 @@ export function useUnsavedImages() {
         const rewritten: Record<string, SlideImage> = {}
         for (const [k, v] of Object.entries(store)) {
           if (v.deleted) continue // deletion committed on the server → drop the tombstone
-          rewritten[k] = v.src.startsWith('data:') ? { ...v, src: `/decks/${deckFileFor(k)}` } : v
+          rewritten[k] = v.src.startsWith('data:') ? { ...v, src: `/decks/${deckFileFor(k, v.src)}` } : v
         }
         await saveImages(rewritten) // dispatches the change event → refresh
       }
