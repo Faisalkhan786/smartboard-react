@@ -24,6 +24,7 @@ import {
 import {
   ElevationDepressionDiagram,
   HeightDistanceDiagram,
+  BrokenTreeQuestionDiagram,
   TreeHeightDiagram,
 } from '../../components/diagrams/diagrams'
 
@@ -69,9 +70,6 @@ export const heightAndDistance: Topic = {
               <DefinitionStack>
                 <DefinitionCard index="1" variant="load" title={<Kw c="cyan">RIGHT TRIANGLE</Kw>}>
                   The height, horizontal distance and line of sight form a right-angled triangle.
-                </DefinitionCard>
-                <DefinitionCard index="2" variant="effort" title={<Kw c="emerald">ANGLE + DISTANCE</Kw>}>
-                  These measurements let us calculate the unknown side.
                 </DefinitionCard>
               </DefinitionStack>
             </SplitAside>
@@ -138,10 +136,37 @@ export const heightAndDistance: Topic = {
       ),
     },
     {
+      navTitle: 'Broken Tree · Will It Touch the Car?',
+      render: () => (
+        <>
+          <Header kicker="Class 9 Math · Apply It" title="WILL IT TOUCH THE CAR?" part="PART 04" />
+          <SlideSplit>
+            <SplitMain>
+              <DiagramCard style={DIAGRAM_CARD_STYLE}>
+                <BrokenTreeQuestionDiagram />
+                <DiagramCaption>
+                  <Kw c="yellow">Tree shown upright · break point marked</Kw>
+                </DiagramCaption>
+              </DiagramCard>
+            </SplitMain>
+            <SplitAside>
+              <Hero eyebrow="THINK ABOUT THE FALL" compact>
+                A tree is <Kw c="yellow">25 m</Kw> tall. It breaks <Kw c="coral">8 m</Kw> above the
+                ground. The broken part makes an angle of approximately <Kw c="cyan">28.1°</Kw> with
+                the ground. A car is parked <Kw c="emerald">15 m</Kw> from the tree's base. Will the
+                broken part touch the car?
+              </Hero>
+            </SplitAside>
+          </SlideSplit>
+          <Footnote>Assume the tree falls toward the car. The diagram does not show the broken part fallen.</Footnote>
+        </>
+      ),
+    },
+    {
       navTitle: 'Worked Example · 45°',
       render: () => (
         <>
-          <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 04" />
+          <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 05" />
           <SlideSplit>
             <SplitMain>
               <DiagramCard style={DIAGRAM_CARD_STYLE}>
@@ -180,7 +205,7 @@ export const heightAndDistance: Topic = {
       navTitle: 'Your Turn · 30°',
       render: () => (
         <>
-          <Header kicker="Class 9 Math · Solve It" title="YOUR TURN" part="PART 05" />
+          <Header kicker="Class 9 Math · Solve It" title="YOUR TURN" part="PART 06" />
           <SlideSplit>
             <SplitMain>
               <FormulaCard label="USE THIS VALUE">

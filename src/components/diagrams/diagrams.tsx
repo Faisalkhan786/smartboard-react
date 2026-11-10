@@ -205,6 +205,38 @@ export const TreeHeightDiagram = () => (
   </svg>
 )
 
+export const BrokenTreeQuestionDiagram = () => (
+  <svg
+    className="labeled-pulley"
+    style={{ height: 170 }}
+    viewBox="0 0 360 220"
+    role="img"
+    aria-label="An upright 25 metre tree with a marked break point 8 metres above the ground and a car parked 15 metres from its base. The broken part is not shown fallen."
+  >
+    <line x1="25" y1="190" x2="340" y2="190" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+
+    <path d="M92 190 L96 55 L104 38 L112 55 L116 190 Z" fill="#92400e" stroke="#d6a35c" strokeWidth="2" />
+    <path d="M104 30 C82 39 78 57 88 68 C72 81 82 100 99 100 C101 115 124 113 128 98 C146 91 142 72 128 67 C136 48 124 32 104 30 Z" fill="#166534" stroke="#34d399" strokeWidth="2" />
+    <path d="M92 145 L100 140 L106 147 L113 139 L119 145" fill="none" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <line x1="72" y1="145" x2="124" y2="145" stroke="#fb7185" strokeWidth="2" strokeDasharray="4 4" />
+    <text x="34" y="139" fill="#fb7185" fontSize="11" fontWeight="900">BREAK · 8 m</text>
+
+    <line x1="57" y1="38" x2="57" y2="190" stroke="#facc15" strokeWidth="2" />
+    <path d="M52 45 L57 37 L62 45 M52 183 L57 191 L62 183" fill="none" stroke="#facc15" strokeWidth="2" strokeLinejoin="round" />
+    <text x="49" y="111" textAnchor="end" fill="#facc15" fontSize="11" fontWeight="900">25 m</text>
+
+    <rect x="250" y="155" width="60" height="25" rx="8" fill="#38bdf8" stroke="#bae6fd" strokeWidth="2" />
+    <path d="M260 155 L270 143 H294 L303 155 Z" fill="#0c4a6e" stroke="#7dd3fc" strokeWidth="2" />
+    <circle cx="264" cy="183" r="6" fill="#0f172a" stroke="#cbd5e1" strokeWidth="2" />
+    <circle cx="297" cy="183" r="6" fill="#0f172a" stroke="#cbd5e1" strokeWidth="2" />
+    <text x="280" y="171" textAnchor="middle" fill="#e0f2fe" fontSize="9" fontWeight="900">CAR</text>
+
+    <line x1="104" y1="207" x2="280" y2="207" stroke="#34d399" strokeWidth="2" />
+    <path d="M111 202 L103 207 L111 212 M273 202 L281 207 L273 212" fill="none" stroke="#34d399" strokeWidth="2" strokeLinejoin="round" />
+    <text x="192" y="220" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="900">15 m</text>
+  </svg>
+)
+
 export const Lever = () => (
   <svg className="labeled-pulley" style={{ height: 185 }} viewBox="0 0 330 195" role="img" aria-label="A lever: a rigid bar on a fulcrum, load on one side, effort on the other">
     {/* beam */}

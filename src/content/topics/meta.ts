@@ -31,5 +31,5 @@ export const TOPICS_META: TopicMeta[] = [
   { id: 'inclined-plane', chapterId: 'work-energy', title: 'Inclined Plane', tagline: 'A sloping surface · MA = l ÷ h', kicker: 'Class 9 Physics · Work & Energy', icon: 'incline', accent: '#34d399', slideCount: 5 },
   { id: 'lever', chapterId: 'work-energy', title: 'Lever', tagline: 'Fulcrum, moments & three classes', kicker: 'Class 9 Physics · Work & Energy', icon: 'lever', accent: '#a78bfa', slideCount: 5 },
   { id: 'movable-pulley', chapterId: 'work-energy', title: 'Movable Pulley', tagline: 'Why effort = load ÷ 2 (derivation)', kicker: 'Class 9 Physics · Work & Energy', icon: 'pulley', accent: '#f472b6', slideCount: 6 },
-  { id: 'height-and-distance', chapterId: 'height-and-distance', title: 'Height and Distance', tagline: 'Angles of elevation, depression & right-triangle problems', kicker: 'Class 9 Math · Height and Distance', icon: 'incline', accent: '#a78bfa', slideCount: 6 },
+  { id: 'height-and-distance', chapterId: 'height-and-distance', title: 'Height and Distance', tagline: 'Angles of elevation, depression & right-triangle problems', kicker: 'Class 9 Math · Height and Distance', icon: 'incline', accent: '#a78bfa', slideCount: 7 },
 ]
