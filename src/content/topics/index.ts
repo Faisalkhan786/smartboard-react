@@ -19,6 +19,7 @@ const LOADERS: Record<string, () => Promise<Topic>> = {
   'inclined-plane': () => import('./inclinedPlane').then((m) => m.inclinedPlane),
   'lever': () => import('./lever').then((m) => m.lever),
   'movable-pulley': () => import('./movablePulley').then((m) => m.movablePulley),
+  'height-and-distance': () => import('./heightAndDistance').then((m) => m.heightAndDistance),
 }
 
 /** Fetch a topic's full content on demand (returns null if the id is unknown). */

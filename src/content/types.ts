@@ -6,9 +6,15 @@ export interface ClassInfo {
   subtitle: string
 }
 
+export interface SubjectInfo {
+  id: string
+  title: string
+}
+
 export interface Chapter {
   id: string
   classId: string
+  subjectId: string
   title: string
   subtitle: string
   kicker: string

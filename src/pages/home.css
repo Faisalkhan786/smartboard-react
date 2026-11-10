@@ -31,6 +31,7 @@
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
 }
+.subject-switch { margin-bottom: 12px; }
 .class-switch button {
   border: none;
   background: transparent;

@@ -14,7 +14,9 @@ export default function Chapter() {
   const topics = chapterId ? topicsInChapter(chapterId) : []
   const quizzes = chapterId ? quizzesInChapter(chapterId) : []
   // chapter number within its own class
-  const idxInClass = chapter ? chaptersInClass(chapter.classId).findIndex((c) => c.id === chapter.id) : -1
+  const idxInClass = chapter
+    ? chaptersInClass(chapter.classId, chapter.subjectId).findIndex((c) => c.id === chapter.id)
+    : -1
   const chapterNo = idxInClass >= 0 ? String(idxInClass + 1).padStart(2, '0') : '—'
 
   const accentStyle = { '--chapter-accent': chapter?.accent ?? '#38bdf8' } as CSSProperties

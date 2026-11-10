@@ -112,6 +112,23 @@ export const InclinedPlane = () => (
   </svg>
 )
 
+export const HeightDistanceDiagram = () => (
+  <svg className="labeled-pulley" style={{ height: 190 }} viewBox="0 0 320 210" role="img" aria-label="A right triangle models a line of sight to the top of a tower, with height h, horizontal distance d, and angle of elevation theta">
+    <path d="M48 178 L270 178 L270 48 Z" fill="rgba(56,189,248,0.06)" />
+    <line x1="25" y1="178" x2="292" y2="178" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+    <line x1="48" y1="178" x2="270" y2="48" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" />
+    <line x1="270" y1="48" x2="270" y2="178" stroke="#facc15" strokeWidth="4" strokeLinecap="round" />
+    <line x1="48" y1="178" x2="270" y2="178" stroke="#34d399" strokeWidth="3" strokeDasharray="7 6" />
+    <path d="M82 178 A34 34 0 0 0 77 161" fill="none" stroke="#fb7185" strokeWidth="3" />
+    <circle cx="48" cy="178" r="5" fill="#fb7185" />
+    <text x="86" y="158" fill="#fb7185" fontSize="16" fontWeight="900">θ</text>
+    <text x="156" y="199" textAnchor="middle" fill="#34d399" fontSize="14" fontWeight="900">distance (d)</text>
+    <text x="286" y="116" fill="#facc15" fontSize="14" fontWeight="900">height (h)</text>
+    <text x="163" y="99" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">line of sight</text>
+    <text x="270" y="37" textAnchor="middle" fill="#e2e8f0" fontSize="12" fontWeight="900">TOP</text>
+  </svg>
+)
+
 export const Lever = () => (
   <svg className="labeled-pulley" style={{ height: 185 }} viewBox="0 0 330 195" role="img" aria-label="A lever: a rigid bar on a fulcrum, load on one side, effort on the other">
     {/* beam */}
