@@ -113,7 +113,7 @@ export const InclinedPlane = () => (
 )
 
 export const HeightDistanceDiagram = () => (
-  <svg className="labeled-pulley" style={{ height: 190 }} viewBox="0 0 320 210" role="img" aria-label="A right triangle models a line of sight to the top of a tower, with height h, horizontal distance d, and angle of elevation theta">
+  <svg className="labeled-pulley" style={{ height: 170 }} viewBox="0 0 320 210" role="img" aria-label="A right triangle models a line of sight to the top of a tower, with height h, horizontal distance d, and angle of elevation theta">
     <path d="M48 178 L270 178 L270 48 Z" fill="rgba(56,189,248,0.06)" />
     <line x1="25" y1="178" x2="292" y2="178" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
     <line x1="48" y1="178" x2="270" y2="48" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" />
@@ -126,6 +126,82 @@ export const HeightDistanceDiagram = () => (
     <text x="286" y="116" fill="#facc15" fontSize="14" fontWeight="900">height (h)</text>
     <text x="163" y="99" textAnchor="middle" fill="#38bdf8" fontSize="12" fontWeight="900">line of sight</text>
     <text x="270" y="37" textAnchor="middle" fill="#e2e8f0" fontSize="12" fontWeight="900">TOP</text>
+  </svg>
+)
+
+export const ElevationDepressionDiagram = () => (
+  <svg
+    className="labeled-pulley"
+    style={{ height: 170 }}
+    viewBox="0 0 440 250"
+    role="img"
+    aria-label="An observer stands to the left of a building. The angle of elevation is at the observer's eye between the horizontal and the line of sight to the top. The angle of depression is at the top of the building between its horizontal and the same line of sight."
+  >
+    <line x1="30" y1="222" x2="420" y2="222" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+
+    <rect x="350" y="48" width="48" height="174" rx="3" fill="#172033" stroke="#facc15" strokeWidth="3" />
+    <line x1="350" y1="48" x2="398" y2="48" stroke="#facc15" strokeWidth="4" />
+    <rect x="361" y="83" width="10" height="16" rx="2" fill="#334155" />
+    <rect x="378" y="83" width="10" height="16" rx="2" fill="#334155" />
+    <rect x="361" y="113" width="10" height="16" rx="2" fill="#334155" />
+    <rect x="378" y="113" width="10" height="16" rx="2" fill="#334155" />
+    <text x="374" y="155" textAnchor="middle" fill="#facc15" fontSize="11" fontWeight="900">BUILDING</text>
+
+    <line x1="78" y1="160" x2="350" y2="160" stroke="#38bdf8" strokeWidth="2.5" strokeDasharray="7 6" />
+    <line x1="374" y1="48" x2="205" y2="48" stroke="#34d399" strokeWidth="2.5" strokeDasharray="7 6" />
+    <line x1="78" y1="160" x2="374" y2="48" stroke="#e2e8f0" strokeWidth="3.5" />
+
+    <path d="M112 160 A34 34 0 0 0 110 148" fill="none" stroke="#38bdf8" strokeWidth="3" />
+    <text x="119" y="151" fill="#38bdf8" fontSize="13" fontWeight="900">ELEVATION</text>
+    <text x="103" y="177" fill="#38bdf8" fontSize="14" fontWeight="900">θ</text>
+
+    <path d="M340 48 A34 34 0 0 1 342 60" fill="none" stroke="#34d399" strokeWidth="3" />
+    <text x="235" y="29" fill="#34d399" fontSize="13" fontWeight="900">DEPRESSION</text>
+    <text x="335" y="83" fill="#34d399" fontSize="14" fontWeight="900">θ</text>
+
+    <circle cx="78" cy="145" r="9" fill="#fb7185" />
+    <line x1="78" y1="154" x2="78" y2="190" stroke="#fb7185" strokeWidth="5" strokeLinecap="round" />
+    <line x1="78" y1="165" x2="64" y2="180" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" />
+    <line x1="78" y1="165" x2="91" y2="174" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" />
+    <line x1="78" y1="190" x2="66" y2="216" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" />
+    <line x1="78" y1="190" x2="90" y2="216" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" />
+    <circle cx="81" cy="160" r="3" fill="#f8fafc" />
+    <text x="78" y="240" textAnchor="middle" fill="#fb7185" fontSize="11" fontWeight="900">OBSERVER</text>
+  </svg>
+)
+
+export const TreeHeightDiagram = () => (
+  <svg
+    className="labeled-pulley"
+    style={{ height: 170 }}
+    viewBox="0 0 320 210"
+    role="img"
+    aria-label="A person observes the top of a tree at a 45 degree angle of elevation. The horizontal distance is 12 metres and the tree height is h."
+  >
+    <path d="M56 172 L196 172 L196 32 Z" fill="rgba(56,189,248,0.06)" />
+    <line x1="25" y1="172" x2="286" y2="172" stroke="#475569" strokeWidth="3" strokeLinecap="round" />
+
+    <line x1="56" y1="172" x2="196" y2="172" stroke="#34d399" strokeWidth="3" strokeDasharray="7 6" />
+    <line x1="56" y1="172" x2="196" y2="32" stroke="#38bdf8" strokeWidth="3.5" />
+    <line x1="196" y1="32" x2="196" y2="172" stroke="#facc15" strokeWidth="4" />
+    <path d="M83 172 A27 27 0 0 0 75 153" fill="none" stroke="#fb7185" strokeWidth="3" />
+    <text x="88" y="152" fill="#fb7185" fontSize="14" fontWeight="900">45°</text>
+
+    <line x1="196" y1="32" x2="196" y2="62" stroke="#34d399" strokeWidth="4" />
+    <path d="M196 24 C171 34 174 49 151 55 C167 61 167 78 146 86 C163 92 163 108 143 118 C160 125 163 141 145 151 L147 172 L219 172 L218 151 C198 142 201 126 218 118 C198 108 198 92 215 86 C194 78 194 61 210 55 C187 49 190 34 196 24 Z" fill="#166534" stroke="#34d399" strokeWidth="2" />
+    <rect x="190" y="132" width="12" height="40" rx="3" fill="#92400e" />
+
+    <circle cx="56" cy="145" r="8" fill="#fb7185" />
+    <line x1="56" y1="153" x2="56" y2="175" stroke="#fb7185" strokeWidth="4" strokeLinecap="round" />
+    <line x1="56" y1="160" x2="46" y2="170" stroke="#fb7185" strokeWidth="3.5" strokeLinecap="round" />
+    <line x1="56" y1="160" x2="66" y2="166" stroke="#fb7185" strokeWidth="3.5" strokeLinecap="round" />
+    <line x1="56" y1="175" x2="48" y2="190" stroke="#fb7185" strokeWidth="3.5" strokeLinecap="round" />
+    <line x1="56" y1="175" x2="64" y2="190" stroke="#fb7185" strokeWidth="3.5" strokeLinecap="round" />
+    <circle cx="59" cy="159" r="2.5" fill="#f8fafc" />
+
+    <text x="125" y="194" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="900">12 m</text>
+    <text x="210" y="105" fill="#facc15" fontSize="14" fontWeight="900">h</text>
+    <text x="196" y="18" textAnchor="middle" fill="#e2e8f0" fontSize="10" fontWeight="900">TREE TOP</text>
   </svg>
 )
 

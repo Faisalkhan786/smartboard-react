@@ -6,6 +6,9 @@ import type { SlideImage } from '../components/smartboard/imageStore'
  * the matching files in /public/decks/.
  */
 export const IMAGE_MANIFEST: Record<string, SlideImage> = {
+  "height-and-distance:s0": {"src":"/decks/height-and-distance__s0.webp","leftPct":9.451924472551168,"topPct":12.581963671257476,"widthPct":74.631676761987,"heightPct":23.19731025256102,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},
+  "height-and-distance:s1": {"src":"/decks/height-and-distance__s1.webp","leftPct":8.642384163224872,"topPct":12.750455709595885,"widthPct":76.25072649865632,"heightPct":23.108905209735575,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},
+  "height-and-distance:s3": {"src":"/decks/height-and-distance__s3.webp","leftPct":9.047154317888017,"topPct":12.80965127217825,"widthPct":76.25080370361448,"heightPct":22.905952667713652,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},
   "inclined-plane:s0": {"src":"/decks/inclined-plane__s0.webp","leftPct":10.700574171583707,"topPct":12.94996303838343,"widthPct":71.50076902867026,"heightPct":21.526733614616717,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},
   "inclined-plane:s1": {"src":"/decks/inclined-plane__s1.webp","leftPct":10.162500410513525,"topPct":12.849070987240008,"widthPct":74.01174342357332,"heightPct":21.77982013105854,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},
   "inclined-plane:s2": {"src":"/decks/inclined-plane__s2.webp","leftPct":10.5212071287042,"topPct":15.875709367468357,"widthPct":72.93560958521714,"heightPct":21.294690592179037,"ratioLocked":false,"cropX":50,"cropY":50,"cropZoom":1,"cropped":false},

@@ -2,7 +2,6 @@ import type { Topic } from '../types'
 import {
   Header,
   Hero,
-  WritePad,
   SlideSplit,
   SplitMain,
   SplitAside,
@@ -22,7 +21,20 @@ import {
   Calculation,
   Kw,
 } from '../../components/slide/primitives'
-import { HeightDistanceDiagram } from '../../components/diagrams/diagrams'
+import {
+  ElevationDepressionDiagram,
+  HeightDistanceDiagram,
+  TreeHeightDiagram,
+} from '../../components/diagrams/diagrams'
+
+const DIAGRAM_CARD_STYLE = {
+  height: 240,
+  flex: '0 0 240px',
+  boxSizing: 'border-box' as const,
+  display: 'flex',
+  flexDirection: 'column' as const,
+  justifyContent: 'center',
+}
 
 export const heightAndDistance: Topic = {
   id: 'height-and-distance',
@@ -40,7 +52,7 @@ export const heightAndDistance: Topic = {
           <Header kicker="Class 9 Math · Trigonometry" title="HEIGHT & DISTANCE" part="PART 01" />
           <SlideSplit>
             <SplitMain>
-              <DiagramCard>
+              <DiagramCard style={DIAGRAM_CARD_STYLE}>
                 <HeightDistanceDiagram />
                 <DiagramCaption>
                   <Kw c="yellow">h = height</Kw>
@@ -73,15 +85,26 @@ export const heightAndDistance: Topic = {
       render: () => (
         <>
           <Header kicker="Class 9 Math · Angles" title="LOOKING UP OR DOWN" part="PART 02" />
-          <WritePad label="Explanation — write here" minHeight={240} />
-          <DefinitionStack>
-            <DefinitionCard index="↑" variant="effort" title={<Kw c="cyan">ANGLE OF ELEVATION</Kw>}>
-              The angle measured <b>upward</b> from the horizontal when looking at an object above us.
-            </DefinitionCard>
-            <DefinitionCard index="↓" variant="load" title={<Kw c="coral">ANGLE OF DEPRESSION</Kw>}>
-              The angle measured <b>downward</b> from the horizontal when looking at an object below us.
-            </DefinitionCard>
-          </DefinitionStack>
+          <SlideSplit>
+            <SplitMain>
+              <DiagramCard style={DIAGRAM_CARD_STYLE}>
+                <ElevationDepressionDiagram />
+                <DiagramCaption>
+                  <Kw c="cyan">Both angles are measured from the horizontal</Kw>
+                </DiagramCaption>
+              </DiagramCard>
+            </SplitMain>
+            <SplitAside>
+              <DefinitionStack>
+                <DefinitionCard index="↑" variant="effort" title={<Kw c="cyan">ANGLE OF ELEVATION</Kw>}>
+                  The angle measured <b>upward</b> from the horizontal when looking at an object above us.
+                </DefinitionCard>
+                <DefinitionCard index="↓" variant="load" title={<Kw c="coral">ANGLE OF DEPRESSION</Kw>}>
+                  The angle measured <b>downward</b> from the horizontal when looking at an object below us.
+                </DefinitionCard>
+              </DefinitionStack>
+            </SplitAside>
+          </SlideSplit>
           <Footnote>When horizontal lines are parallel, the angle of depression equals the corresponding angle of elevation.</Footnote>
         </>
       ),
@@ -93,7 +116,7 @@ export const heightAndDistance: Topic = {
           <Header kicker="Class 9 Math · Right Triangles" title="CONNECT THE SIDES" part="PART 03" />
           <SlideSplit>
             <SplitMain>
-              <DiagramCard>
+              <DiagramCard style={DIAGRAM_CARD_STYLE}>
                 <HeightDistanceDiagram />
                 <DiagramCaption>
                   <Kw c="coral">θ = angle of elevation</Kw>
@@ -121,9 +144,12 @@ export const heightAndDistance: Topic = {
           <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 04" />
           <SlideSplit>
             <SplitMain>
-              <FormulaCard label="RELATION">
-                tan θ = <Kw c="yellow">h</Kw> ÷ <Kw c="emerald">d</Kw>
-              </FormulaCard>
+              <DiagramCard style={DIAGRAM_CARD_STYLE}>
+                <TreeHeightDiagram />
+                <DiagramCaption>
+                  <Kw c="cyan">tan 45° = height (h) ÷ distance (d)</Kw>
+                </DiagramCaption>
+              </DiagramCard>
             </SplitMain>
             <SplitAside>
               <SectionHead num="01" title="A 45° View" />
