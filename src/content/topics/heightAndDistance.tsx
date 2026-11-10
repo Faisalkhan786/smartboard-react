@@ -137,6 +137,7 @@ export const heightAndDistance: Topic = {
     },
     {
       navTitle: 'Broken Tree · Will It Touch the Car?',
+      hidden: true,
       render: () => (
         <>
           <Header kicker="Class 9 Math · Apply It" title="WILL IT TOUCH THE CAR?" part="PART 04" />
@@ -166,7 +167,7 @@ export const heightAndDistance: Topic = {
       navTitle: 'Worked Example · 45°',
       render: () => (
         <>
-          <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 05" />
+          <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 04" />
           <SlideSplit>
             <SplitMain>
               <DiagramCard style={DIAGRAM_CARD_STYLE}>
@@ -205,7 +206,7 @@ export const heightAndDistance: Topic = {
       navTitle: 'Your Turn · 30°',
       render: () => (
         <>
-          <Header kicker="Class 9 Math · Solve It" title="YOUR TURN" part="PART 06" />
+          <Header kicker="Class 9 Math · Solve It" title="YOUR TURN" part="PART 05" />
           <SlideSplit>
             <SplitMain>
               <FormulaCard label="USE THIS VALUE">

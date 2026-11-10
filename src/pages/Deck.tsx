@@ -86,24 +86,30 @@ function DeckView({ topic }: { topic: Topic }) {
   // Static slides + user-inserted blank slides, in display order
   const composed = useMemo<ComposedSlide[]>(() => {
     if (!topic) return []
-    return layout.order.map((k) => {
-      if (isUserKey(k)) {
+    return layout.order
+      .filter((k) => {
+        if (isUserKey(k)) return true
+        const i = parseInt(k.slice(1), 10)
+        return !topic.slides[i]?.hidden
+      })
+      .map((k) => {
+        if (isUserKey(k)) {
+          return {
+            key: k,
+            navTitle: layout.users[k]?.navTitle ?? 'Blank slide',
+            isUser: true,
+            render: () => null,
+          }
+        }
+        const i = parseInt(k.slice(1), 10)
+        const sd = topic.slides[i]
         return {
           key: k,
-          navTitle: layout.users[k]?.navTitle ?? 'Blank slide',
-          isUser: true,
-          render: () => null,
+          navTitle: sd?.navTitle ?? '—',
+          isUser: false,
+          render: sd ? sd.render : () => null,
         }
-      }
-      const i = parseInt(k.slice(1), 10)
-      const sd = topic.slides[i]
-      return {
-        key: k,
-        navTitle: sd?.navTitle ?? '—',
-        isUser: false,
-        render: sd ? sd.render : () => null,
-      }
-    })
+      })
   }, [topic, layout])
 
   const slideCount = composed.length

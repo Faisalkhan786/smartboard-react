@@ -24,6 +24,8 @@ export interface Chapter {
 
 export interface SlideDef {
   navTitle: string
+  /** Keep the slide in content while omitting it from the visible deck. */
+  hidden?: boolean
   /** slide body — composed from slide primitives */
   render: () => ReactNode
 }
