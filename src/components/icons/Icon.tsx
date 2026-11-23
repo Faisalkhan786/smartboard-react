@@ -152,6 +152,27 @@ const ICONS: Record<string, ReactNode> = {
     </>
   ),
   check: <path d="M20 6 L9 17 l-5 -5" />,
+  atom: (
+    <>
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.3" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.3" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4.3" transform="rotate(120 12 12)" />
+    </>
+  ),
+  sigma: <path d="M17.5 4 H6.5 l6.2 8 -6.2 8 H17.5" />,
+  leaf: (
+    <>
+      <path d="M5 21 C5 12 12 4 20 4 C20 13 13 20 5 21 Z" />
+      <path d="M5 21 C8.5 16 13 11 18 8" />
+    </>
+  ),
+  flask: (
+    <>
+      <path d="M9 3 h6 M10 3 v6 l-5.2 9 a2 2 0 0 0 1.8 3 h10.8 a2 2 0 0 0 1.8 -3 l-5.2 -9 V3" />
+      <path d="M7.4 15 h9.2" />
+    </>
+  ),
   cursor: <path d="M5 3 L5 19 L9.2 14.8 L12 21 L14.6 19.9 L11.8 13.8 L18 13.8 Z" />,
   upload: (
     <>

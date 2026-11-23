@@ -14,6 +14,8 @@ body,
 body {
   background: radial-gradient(circle at center, #0f172a 0%, #020408 100%);
   color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {

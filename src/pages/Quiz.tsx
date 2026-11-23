@@ -346,6 +346,6 @@ export default function Quiz() {
   }, [quizId])
 
   if (quiz === undefined) return <QuizLoading />
-  if (quiz === null) return <Navigate to="/" replace />
+  if (quiz === null) return <Navigate to="/studio" replace />
   return <QuizView quiz={quiz} />
 }

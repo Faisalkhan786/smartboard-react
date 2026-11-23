@@ -13,7 +13,10 @@ export interface TopicMeta {
   id: string
   chapterId: string
   title: string
+  /** short prose description — one consistent line per topic */
   tagline: string
+  /** optional key formula / fact, shown as a mono chip on the chapter list */
+  formula?: string
   kicker: string
   icon: string
   accent: string
@@ -21,15 +24,15 @@ export interface TopicMeta {
 }
 
 export const TOPICS_META: TopicMeta[] = [
-  { id: 'work', chapterId: 'work-energy', title: 'Work', tagline: 'Force × displacement · W = F × s', kicker: 'Class 9 Physics · Work & Energy', icon: 'force', accent: '#818cf8', slideCount: 6 },
-  { id: 'work-energy-theorem', chapterId: 'work-energy', title: 'Work-Energy Theorem', tagline: 'Work done = change in energy', kicker: 'Class 9 Physics · Work & Energy', icon: 'bolt', accent: '#f97316', slideCount: 6 },
-  { id: 'kinetic-energy', chapterId: 'work-energy', title: 'Kinetic Energy', tagline: 'Energy of motion · KE = ½mv²', kicker: 'Class 9 Physics · Work & Energy', icon: 'motion', accent: '#34d399', slideCount: 6 },
-  { id: 'potential-energy', chapterId: 'work-energy', title: 'Potential Energy', tagline: 'Stored energy of position · PE = mgh', kicker: 'Class 9 Physics · Work & Energy', icon: 'gravity', accent: '#a78bfa', slideCount: 6 },
-  { id: 'conservation-energy', chapterId: 'work-energy', title: 'Conservation of Energy', tagline: 'KE + PE stays constant', kicker: 'Class 9 Physics · Work & Energy', icon: 'bolt', accent: '#2dd4bf', slideCount: 6 },
-  { id: 'simple-machine', chapterId: 'work-energy', title: 'Simple Machines', tagline: 'Load, effort & mechanical advantage', kicker: 'Class 9 Physics · Work & Energy', icon: 'gear', accent: '#38bdf8', slideCount: 3 },
-  { id: 'pulley', chapterId: 'work-energy', title: 'Pulley', tagline: 'Fixed & movable pulleys, MA & numericals', kicker: 'Class 9 Physics · Work & Energy', icon: 'pulley', accent: '#facc15', slideCount: 5 },
-  { id: 'inclined-plane', chapterId: 'work-energy', title: 'Inclined Plane', tagline: 'A sloping surface · MA = l ÷ h', kicker: 'Class 9 Physics · Work & Energy', icon: 'incline', accent: '#34d399', slideCount: 5 },
-  { id: 'lever', chapterId: 'work-energy', title: 'Lever', tagline: 'Fulcrum, moments & three classes', kicker: 'Class 9 Physics · Work & Energy', icon: 'lever', accent: '#a78bfa', slideCount: 5 },
-  { id: 'movable-pulley', chapterId: 'work-energy', title: 'Movable Pulley', tagline: 'Why effort = load ÷ 2 (derivation)', kicker: 'Class 9 Physics · Work & Energy', icon: 'pulley', accent: '#f472b6', slideCount: 6 },
-  { id: 'height-and-distance', chapterId: 'height-and-distance', title: 'Height and Distance', tagline: 'Angles of elevation, depression & right-triangle problems', kicker: 'Class 9 Math · Height and Distance', icon: 'incline', accent: '#a78bfa', slideCount: 6 },
+  { id: 'work', chapterId: 'work-energy', title: 'Work', tagline: 'Force applied over a distance', formula: 'W = F·s', kicker: 'Class 9 Physics · Work & Energy', icon: 'force', accent: '#818cf8', slideCount: 6 },
+  { id: 'work-energy-theorem', chapterId: 'work-energy', title: 'Work-Energy Theorem', tagline: 'Work done changes energy', formula: 'W = ΔKE', kicker: 'Class 9 Physics · Work & Energy', icon: 'bolt', accent: '#f97316', slideCount: 6 },
+  { id: 'kinetic-energy', chapterId: 'work-energy', title: 'Kinetic Energy', tagline: 'Energy of a moving body', formula: 'KE = ½mv²', kicker: 'Class 9 Physics · Work & Energy', icon: 'motion', accent: '#34d399', slideCount: 6 },
+  { id: 'potential-energy', chapterId: 'work-energy', title: 'Potential Energy', tagline: 'Energy stored by height', formula: 'PE = mgh', kicker: 'Class 9 Physics · Work & Energy', icon: 'gravity', accent: '#a78bfa', slideCount: 6 },
+  { id: 'conservation-energy', chapterId: 'work-energy', title: 'Conservation of Energy', tagline: 'Total energy stays constant', formula: 'KE + PE = const', kicker: 'Class 9 Physics · Work & Energy', icon: 'bolt', accent: '#2dd4bf', slideCount: 6 },
+  { id: 'simple-machine', chapterId: 'work-energy', title: 'Simple Machines', tagline: 'Tools that multiply effort', formula: 'MA = L / E', kicker: 'Class 9 Physics · Work & Energy', icon: 'gear', accent: '#38bdf8', slideCount: 3 },
+  { id: 'pulley', chapterId: 'work-energy', title: 'Pulley', tagline: 'Changes force & direction', formula: 'MA = 1–2', kicker: 'Class 9 Physics · Work & Energy', icon: 'pulley', accent: '#facc15', slideCount: 5 },
+  { id: 'inclined-plane', chapterId: 'work-energy', title: 'Inclined Plane', tagline: 'A ramp reduces effort', formula: 'MA = l / h', kicker: 'Class 9 Physics · Work & Energy', icon: 'incline', accent: '#34d399', slideCount: 5 },
+  { id: 'lever', chapterId: 'work-energy', title: 'Lever', tagline: 'Turns about a fulcrum', formula: 'M = F·d', kicker: 'Class 9 Physics · Work & Energy', icon: 'lever', accent: '#a78bfa', slideCount: 5 },
+  { id: 'movable-pulley', chapterId: 'work-energy', title: 'Movable Pulley', tagline: 'Effort is half the load', formula: 'E = L / 2', kicker: 'Class 9 Physics · Work & Energy', icon: 'pulley', accent: '#f472b6', slideCount: 6 },
+  { id: 'height-and-distance', chapterId: 'height-and-distance', title: 'Height and Distance', tagline: 'Angles of elevation & depression', formula: 'tan θ = h / d', kicker: 'Class 9 Math · Height and Distance', icon: 'incline', accent: '#a78bfa', slideCount: 6 },
 ]

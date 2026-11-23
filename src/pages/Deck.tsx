@@ -452,6 +452,6 @@ export default function Deck() {
   }, [topicId])
 
   if (topic === undefined) return <DeckLoading />
-  if (topic === null) return <Navigate to="/" replace />
+  if (topic === null) return <Navigate to="/studio" replace />
   return <DeckView topic={topic} />
 }

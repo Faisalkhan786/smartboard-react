@@ -1,0 +1,74 @@
+/* ===== Shared full-width app top bar ===== */
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 40; /* above page body so dropdown menus render on top */
+  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(6, 9, 17, 0.92), rgba(6, 9, 17, 0.62));
+  border-bottom: 1px solid var(--border-subtle);
+}
+.appbar-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.appbar-spacer { flex: 1 1 auto; }
+
+/* brand / logo → always links home */
+.appbar-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  font-size: 16px;
+  color: var(--text-white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.appbar-logo .mk {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+  box-shadow: 0 6px 16px -4px rgba(37, 99, 235, 0.6);
+}
+.appbar-divider { width: 1px; height: 24px; background: var(--border-subtle); margin: 0 2px; }
+
+/* back affordance (chapter → studio) */
+.appbar-back {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--card-glass);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.appbar-back:hover { color: #fff; border-color: var(--accent-cyan); transform: translateX(-2px); }
+
+/* breadcrumb (logo is muted inside a crumb until hovered) */
+.appbar-crumb { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; min-width: 0; }
+.appbar-crumb .appbar-logo { color: var(--text-muted); }
+.appbar-crumb .appbar-logo:hover { color: #fff; }
+.appbar-sep { color: #475569; flex: 0 0 auto; }
+.appbar-cur { color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.appbar-logo:focus-visible,
+.appbar-back:focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .appbar-logo .l-name,
+  .appbar-crumb .appbar-logo { font-size: 14px; }
+}
