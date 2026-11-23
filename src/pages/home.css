@@ -56,12 +56,6 @@
 .home-topbar-divider { width: 1px; height: 26px; background: var(--border-subtle); margin: 0 4px; }
 .nav-flow { color: #475569; flex: 0 0 auto; }
 
-@media (max-width: 720px) {
-  .app-header-inner { flex-wrap: wrap; }
-  .app-header-spacer { display: none; }
-  .home-brand { flex: 1 1 100%; }
-}
-
 /* step chip + dropdown */
 .nav-step { display: inline-flex; align-items: center; gap: 9px; }
 .nav-stepno {
@@ -285,7 +279,9 @@
 }
 .chapter-back:hover { color: #fff; border-color: var(--accent-cyan); }
 
-.home-footnote { margin-top: 26px; font-size: 11.5px; font-weight: 600; color: #475569; text-align: center; line-height: 1.6; }
+/* margin-top:auto pushes the footer to the bottom of the page on short
+   content (so it never floats mid-screen); padding-top keeps a min gap. */
+.home-footnote { margin-top: auto; padding-top: 32px; font-size: 11.5px; font-weight: 600; color: #475569; text-align: center; line-height: 1.6; }
 
 /* Keyboard accessibility */
 .topic-card:focus-visible,
@@ -384,6 +380,23 @@
   gap: 10px;
 }
 @media (max-width: 560px) { .deck-list { grid-template-columns: 1fr; } }
+
+/* ===== Mobile: compact the header's Class ▾ / Subject ▾ switchers so the
+   bar never overflows. Placed at the end so it overrides the base nav styles. ===== */
+@media (max-width: 600px) {
+  .nav-stepno,
+  .nav-flow,
+  .nav-pill-lab { display: none; }
+  .nav-step { gap: 0; }
+  .nav-pill { padding: 7px 10px; font-size: 13px; }
+}
+
+/* ===== Mobile: tighten the dashboard typography a touch ===== */
+@media (max-width: 560px) {
+  .home-title { font-size: 25px; }
+  .dchap { padding: 15px; }
+  .dchap-no { font-size: 18px; }
+}
 
 .deck-row {
   display: flex;

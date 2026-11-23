@@ -71,7 +71,11 @@
 .appbar-logo:focus-visible,
 .appbar-back:focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
 
-@media (max-width: 560px) {
-  .appbar-logo .l-name,
-  .appbar-crumb .appbar-logo { font-size: 14px; }
+/* ===== Mobile: keep only the essentials so the bar never overflows ===== */
+@media (max-width: 600px) {
+  .appbar-inner { gap: 8px; padding: 0 12px; }
+  .appbar-logo-name { display: none; }   /* keep the ⚡ mark, drop the text */
+  .appbar-divider { display: none; }
+  .appbar-mid { display: none; }          /* drop the "Chapters" middle crumb */
+  .appbar-crumb { gap: 8px; }
 }

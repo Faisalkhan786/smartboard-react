@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, Navigate, Link } from 'react-router-dom'
 import { loadTopic } from '../content/topics'
 import { recordDeckProgress } from '../content/progress'
+import Icon from '../components/icons/Icon'
 import type { Topic } from '../content/types'
 import { CHAPTERS } from '../content/chapters'
 import { CLASSES } from '../content/classes'
@@ -387,6 +388,38 @@ function DeckView({ topic }: { topic: Topic }) {
 
   return (
     <div className={'deck-shell' + (landscape ? ' landscape' : '')}>
+      {/* Floating back — mobile only (the toolbar/sidebar is hidden on phones). */}
+      <Link
+        to={toolbarProps.backTo}
+        className="deck-mobile-back"
+        aria-label={`Back to ${toolbarProps.backLabel}`}
+      >
+        <Icon name="back" size={18} />
+      </Link>
+
+      {/* Slide prev / next — mobile only (slide nav lives in the hidden sidebar). */}
+      <div className="deck-mobile-nav" role="group" aria-label="Slide navigation">
+        <button
+          type="button"
+          className="deck-mnav-btn"
+          onClick={() => setSlide(Math.max(0, safeSlide - 1))}
+          disabled={safeSlide === 0}
+          aria-label="Previous slide"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
+        </button>
+        <span className="deck-mnav-count">{safeSlide + 1} / {slideCount}</span>
+        <button
+          type="button"
+          className="deck-mnav-btn"
+          onClick={() => setSlide(Math.min(slideCount - 1, safeSlide + 1))}
+          disabled={safeSlide >= slideCount - 1}
+          aria-label="Next slide"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+
       {!landscape && <Toolbar {...toolbarProps} />}
 
       <Smartboard

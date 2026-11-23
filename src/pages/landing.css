@@ -15,7 +15,9 @@
   font-family: var(--font-sans);
   line-height: 1.5;
   min-height: 100vh;
-  overflow-x: hidden;
+  /* clip (not hidden) prevents horizontal scroll WITHOUT making .landing a
+     scroll container — otherwise the sticky nav inside it breaks on scroll. */
+  overflow-x: clip;
 }
 .landing a { color: inherit; text-decoration: none; }
 .l-wrap { max-width: var(--l-maxw); margin: 0 auto; padding: 0 24px; }
@@ -236,5 +238,15 @@
   .l-feat, .l-chaps { grid-template-columns: 1fr; }
   .l-yt { grid-template-columns: 1fr; text-align: left; }
   .l-hide { display: none; }
+}
+/* Mobile: keep the nav from overflowing — tighter brand, hide the secondary
+   "Studio" button (Start Learning stays as the primary CTA). */
+@media (max-width: 560px) {
+  .l-wrap { padding: 0 16px; }
+  .l-nav-in { gap: 10px; height: 60px; }
+  .l-brand { font-size: 15px; }
+  .l-brand .mark { width: 30px; height: 30px; }
+  .landing nav .l-btn-ghost { display: none; }
+  .landing nav .l-btn-primary { padding: 10px 15px; font-size: 13.5px; }
 }
 @media (max-width: 480px) { .l-subjects { grid-template-columns: 1fr; } }

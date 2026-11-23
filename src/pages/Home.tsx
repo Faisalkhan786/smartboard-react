@@ -137,7 +137,7 @@ export default function Home() {
       <AppBar>
         <Link to="/" className="appbar-logo">
           <span className="mk"><Icon name="bolt" size={16} /></span>
-          Smartboard Studio
+          <span className="appbar-logo-name">Smartboard Studio</span>
         </Link>
         <div className="appbar-divider" />
 

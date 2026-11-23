@@ -32,10 +32,10 @@ export default function Chapter() {
         <nav className="appbar-crumb" aria-label="Breadcrumb">
           <Link to="/" className="appbar-logo">
             <span className="mk"><Icon name="bolt" size={16} /></span>
-            Smartboard Studio
+            <span className="appbar-logo-name">Smartboard Studio</span>
           </Link>
-          <span className="appbar-sep">›</span>
-          <Link to="/studio" className="appbar-crumb-link">Chapters</Link>
+          <span className="appbar-sep appbar-mid">›</span>
+          <Link to="/studio" className="appbar-crumb-link appbar-mid">Chapters</Link>
           <span className="appbar-sep">›</span>
           <span className="appbar-cur">{chapter?.title ?? 'Chapter'}</span>
         </nav>
