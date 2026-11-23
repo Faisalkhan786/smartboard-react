@@ -63,6 +63,9 @@
 .appbar-crumb .appbar-logo { color: var(--text-muted); }
 .appbar-crumb .appbar-logo:hover { color: #fff; }
 .appbar-sep { color: #475569; flex: 0 0 auto; }
+.appbar-crumb-link { color: var(--text-muted); text-decoration: none; transition: color 0.15s ease; flex: 0 0 auto; }
+.appbar-crumb-link:hover { color: #fff; }
+.appbar-crumb-link:focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
 .appbar-cur { color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .appbar-logo:focus-visible,

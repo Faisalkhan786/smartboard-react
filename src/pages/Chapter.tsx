@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import { CHAPTERS, chaptersInClass } from '../content/chapters'
 import { topicsInChapter } from '../content/topics'
 import { quizzesInChapter } from '../content/quizzes'
+import { getChapterProgress, isTopicDone } from '../content/progress'
 import Icon from '../components/icons/Icon'
 import AppBar from '../components/AppBar'
 import './chapter.css'
@@ -12,6 +13,8 @@ export default function Chapter() {
   const chapter = CHAPTERS.find((c) => c.id === chapterId)
   const topics = chapterId ? topicsInChapter(chapterId) : []
   const quizzes = chapterId ? quizzesInChapter(chapterId) : []
+  const progress = getChapterProgress(topics.map((t) => t.id))
+  const totalSlides = topics.reduce((sum, t) => sum + t.slideCount, 0)
   // chapter number within its own class
   const idxInClass = chapter
     ? chaptersInClass(chapter.classId, chapter.subjectId).findIndex((c) => c.id === chapter.id)
@@ -32,6 +35,8 @@ export default function Chapter() {
             Smartboard Studio
           </Link>
           <span className="appbar-sep">›</span>
+          <Link to="/studio" className="appbar-crumb-link">Chapters</Link>
+          <span className="appbar-sep">›</span>
           <span className="appbar-cur">{chapter?.title ?? 'Chapter'}</span>
         </nav>
       </AppBar>
@@ -47,6 +52,15 @@ export default function Chapter() {
             {chapter?.subtitle ?? ''}
             {topics.length > 0 ? ` · ${topics.length} topics` : ''}
           </p>
+          {topics.length > 0 && (
+            <div className="ch-progress">
+              <div className="ch-pbar"><i style={{ width: `${progress.percent}%` }} /></div>
+              <div className="ch-plab">
+                <span className="on">{progress.doneTopics} of {progress.totalTopics} done</span>
+                <span>{totalSlides} slides</span>
+              </div>
+            </div>
+          )}
         </header>
 
         {/* topics — numbered, cohesive cyan, 2-column */}
@@ -61,9 +75,12 @@ export default function Chapter() {
           <div className="ch-grid">
             {topics.map((t, i) => {
               const ready = t.slideCount > 0
+              const done = ready && isTopicDone(t.id)
               const inner = (
                 <>
-                  <span className="ch-num">{String(i + 1).padStart(2, '0')}</span>
+                  <span className={`ch-st${done ? ' done' : ''}`}>
+                    {done ? '✓' : String(i + 1).padStart(2, '0')}
+                  </span>
                   <span className="ch-ico"><Icon name={t.icon} size={18} /></span>
                   <div className="ch-body">
                     <div className="ch-title">{t.title}</div>

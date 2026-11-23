@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { loadTopic } from '../content/topics'
+import { recordDeckProgress } from '../content/progress'
 import type { Topic } from '../content/types'
 import { CHAPTERS } from '../content/chapters'
 import { CLASSES } from '../content/classes'
@@ -115,6 +116,13 @@ function DeckView({ topic }: { topic: Topic }) {
   const slideCount = composed.length
   const safeSlide = Math.min(slide, Math.max(0, slideCount - 1))
   const activeKey = composed[safeSlide]?.key ?? staticKey(0)
+
+  // Track deck position for Resume + per-topic progress (local-only).
+  useEffect(() => {
+    if (slideCount > 0) {
+      recordDeckProgress(topic.id, topic.chapterId, safeSlide, slideCount)
+    }
+  }, [topic.id, topic.chapterId, safeSlide, slideCount])
 
   // Floating-toolbar (landscape) open/close with a downward exit animation
   const openTools = useCallback(() => {

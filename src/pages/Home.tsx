@@ -4,7 +4,7 @@ import { CLASSES } from '../content/classes'
 import { SUBJECTS } from '../content/subjects'
 import { chaptersInClass } from '../content/chapters'
 import { topicsInChapter } from '../content/topics'
-import Card from './Card'
+import { getChapterProgress } from '../content/progress'
 import Icon from '../components/icons/Icon'
 import AppBar from '../components/AppBar'
 import './home.css'
@@ -57,7 +57,7 @@ function NavDropdown({
             if (!disabled) onToggle()
           }}
         >
-          <span className="nav-pill-lab">{label}</span>
+          {label && <span className="nav-pill-lab">{label}</span>}
           <span className="nav-pill-val">{selected ? selected.title : placeholder}</span>
           <svg
             className="nav-pill-caret"
@@ -104,7 +104,6 @@ export default function Home() {
   )
   const [openDD, setOpenDD] = useState<'class' | 'subject' | null>(null)
 
-  // Close the open dropdown when clicking anywhere outside a dropdown.
   useEffect(() => {
     if (!openDD) return
     const onDown = (e: MouseEvent) => {
@@ -144,7 +143,7 @@ export default function Home() {
 
         <NavDropdown
           stepNo={1}
-          label="Class"
+          label=""
           options={CLASSES}
           selectedId={activeClass}
           placeholder="Select…"
@@ -180,27 +179,9 @@ export default function Home() {
         />
       </AppBar>
 
-      {/* ===== Body ===== */}
+      {/* ===== Dashboard ===== */}
       <div className="home">
-        <div className="home-body">
-          <div className="home-pagehead">
-            <div className="home-crumb">
-              {ready ? (
-                <>
-                  <b>{selectedSubject!.title}</b> · {selectedClass!.title} · Chapters
-                </>
-              ) : (
-                'Get started'
-              )}
-            </div>
-            <h1 className="home-title">{ready ? 'Pick a chapter' : 'Welcome to Smartboard Studio'}</h1>
-            <p className="home-sub">
-              {ready
-                ? 'Choose a chapter to see its topics and decks.'
-                : 'Pick a class above to begin — then the subject unlocks.'}
-            </p>
-          </div>
-
+        <div className="home-dash">
           {!ready ? (
             <div className="home-emptystate">
               <span className="home-emptystate-badge">{selectedClass ? '2' : '1'}</span>
@@ -216,30 +197,73 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <div className="topic-grid">
-              {chapters.length === 0 && (
-                <div className="empty-note" style={{ textAlign: 'center' }}>
+            <>
+              <div className="home-pagehead dash-pagehead">
+                <div className="home-crumb">
+                  <b>{selectedSubject!.title}</b> · {selectedClass!.title} · Chapters
+                </div>
+                <h1 className="home-title">Pick a chapter</h1>
+                <p className="home-sub">Choose a chapter to see its topics and decks.</p>
+              </div>
+
+              {chapters.length === 0 ? (
+                <div className="empty-note">
                   No {selectedSubject!.title} chapters in this class yet — coming soon.
                 </div>
+              ) : (
+                <div className="dash-chaps">
+                  {chapters.map((ch, i) => {
+                    const topics = topicsInChapter(ch.id)
+                    const live = topics.length > 0
+                    const prog = getChapterProgress(topics.map((t) => t.id))
+                    const no = String(i + 1).padStart(2, '0')
+                    const status = !live
+                      ? 'Soon'
+                      : prog.percent === 100
+                        ? 'Complete'
+                        : prog.doneTopics > 0
+                          ? 'In progress'
+                          : 'Ready'
+                    const body = (
+                      <>
+                        <div className="dchap-top">
+                          <span className="dchap-no">{no}</span>
+                          <span className="dchap-ico"><Icon name={ch.icon} size={20} /></span>
+                          <span className="dchap-status">{status}</span>
+                        </div>
+                        <h3>{ch.title}</h3>
+                        <div className="dchap-sub">{ch.subtitle}</div>
+                        <div className="dchap-foot">
+                          <div className="dbar"><i style={{ width: `${prog.percent}%` }} /></div>
+                          <div className="dfl">
+                            {live ? (
+                              <>
+                                <span className="on">{topics.length} topics</span>
+                                <span>{prog.doneTopics}/{prog.totalTopics} done</span>
+                              </>
+                            ) : (
+                              <>
+                                <span>Planned</span>
+                                <span>—</span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )
+                    return live ? (
+                      <Link key={ch.id} to={`/chapter/${ch.id}`} className="dchap live">
+                        {body}
+                      </Link>
+                    ) : (
+                      <div key={ch.id} className="dchap soon">
+                        {body}
+                      </div>
+                    )
+                  })}
+                </div>
               )}
-              {chapters.map((ch) => {
-                const n = topicsInChapter(ch.id).length
-                return (
-                  <Card
-                    key={ch.id}
-                    to={`/chapter/${ch.id}`}
-                    ready={n > 0}
-                    accent={ch.accent}
-                    icon={ch.icon}
-                    kicker=""
-                    title={ch.title}
-                    tagline={ch.subtitle}
-                    meta={n > 0 ? `${n} ${n === 1 ? 'topic' : 'topics'}` : 'Coming soon'}
-                    cta="Open chapter"
-                  />
-                )
-              })}
-            </div>
+            </>
           )}
         </div>
 
