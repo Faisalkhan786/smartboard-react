@@ -3,6 +3,7 @@ import { useParams, Navigate, Link } from 'react-router-dom'
 import { loadTopic } from '../content/topics'
 import { recordDeckProgress } from '../content/progress'
 import Icon from '../components/icons/Icon'
+import UserImageSlide from '../components/slide/UserImageSlide'
 import type { Topic } from '../content/types'
 import { CHAPTERS } from '../content/chapters'
 import { CLASSES } from '../content/classes'
@@ -34,6 +35,7 @@ interface ComposedSlide {
   key: string
   navTitle: string
   isUser: boolean
+  imageSlot?: 'diagram' | 'top' | 'full'
   render: () => ReactNode
 }
 
@@ -96,11 +98,13 @@ function DeckView({ topic }: { topic: Topic }) {
       })
       .map((k) => {
         if (isUserKey(k)) {
+          const mode = layout.users[k]?.imageMode
           return {
             key: k,
             navTitle: layout.users[k]?.navTitle ?? 'Blank slide',
             isUser: true,
-            render: () => null,
+            imageSlot: mode,
+            render: mode ? () => <UserImageSlide mode={mode} /> : () => null,
           }
         }
         const i = parseInt(k.slice(1), 10)
@@ -109,6 +113,7 @@ function DeckView({ topic }: { topic: Topic }) {
           key: k,
           navTitle: sd?.navTitle ?? '—',
           isUser: false,
+          imageSlot: sd?.imageSlot,
           render: sd ? sd.render : () => null,
         }
       })
@@ -331,6 +336,31 @@ function DeckView({ topic }: { topic: Topic }) {
     saveLayout(topic.id, next)
   }
 
+  // Blank (user) slide image placement — None / Top / Full
+  const activeComposed = composed[safeSlide]
+  const activeUserKey = activeComposed?.isUser ? activeComposed.key : null
+  const activeImageMode = activeUserKey ? layout.users[activeUserKey]?.imageMode : undefined
+  const onImageMode = (m: 'top' | 'full' | null) => {
+    if (!activeUserKey) return
+    const prev = layout.users[activeUserKey]
+    const meta = {
+      id: activeUserKey,
+      navTitle: prev?.navTitle ?? 'Blank slide',
+      ...(m ? { imageMode: m } : {}),
+    }
+    const next: DeckLayout = { ...layout, users: { ...layout.users, [activeUserKey]: meta } }
+    setLayout(next)
+    saveLayout(topic.id, next)
+  }
+
+  // Slot-image fit + reposition (replaces the free-overlay move/crop for slot images)
+  const onSlotFit = (fit: 'cover' | 'contain') => {
+    if (currentImage) onImageChange({ ...currentImage, fit })
+  }
+  const onSlotPos = (x: number, y: number) => {
+    if (currentImage) onImageChange({ ...currentImage, cropX: x, cropY: y })
+  }
+
   const toolbarProps: ToolbarProps = {
     topicTitle: topic.title,
     topicIcon: topic.icon,
@@ -382,6 +412,16 @@ function DeckView({ topic }: { topic: Topic }) {
     onExport: () => exportPng(`${topic.id}_slide_${safeSlide + 1}.png`),
     format: formatId,
     onFormat: setFormatId,
+    isUserSlide: Boolean(activeUserKey),
+    imageMode: activeImageMode,
+    onImageMode,
+    isSlotSlide: Boolean(activeComposed?.imageSlot),
+    hasImage: Boolean(currentImage),
+    fit: currentImage?.fit,
+    posX: currentImage?.cropX,
+    posY: currentImage?.cropY,
+    onFit: onSlotFit,
+    onPos: onSlotPos,
   }
 
   const landscape = formatId === 'landscape'
@@ -434,6 +474,7 @@ function DeckView({ topic }: { topic: Topic }) {
         inkInteractive={!imageEditing}
         settings={{ mode, color, size }}
         image={currentImage}
+        imageSlot={composed[safeSlide]?.imageSlot}
         imageEditing={imageEditing}
         cropEditing={cropEditing}
         onImageChange={onImageChange}

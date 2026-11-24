@@ -40,6 +40,7 @@ export const pulley: Topic = {
   slides: [
     {
       navTitle: 'What is a Pulley?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Simple Machines" title="PULLEY" part="PART 01" />
@@ -73,6 +74,7 @@ export const pulley: Topic = {
     },
     {
       navTitle: 'Fixed Pulley',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Pulley" title="FIXED PULLEY" part="PART 02" />
@@ -108,6 +110,7 @@ export const pulley: Topic = {
     },
     {
       navTitle: 'Movable Pulley',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Pulley" title="MOVABLE PULLEY" part="PART 03" />

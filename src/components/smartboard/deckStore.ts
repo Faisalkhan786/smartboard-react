@@ -11,6 +11,8 @@
 export interface UserSlideMeta {
   id: string
   navTitle: string
+  /** blank-slide image placement: 'top' box, 'full' bleed, or none (pen only) */
+  imageMode?: 'top' | 'full'
 }
 
 export interface DeckLayout {

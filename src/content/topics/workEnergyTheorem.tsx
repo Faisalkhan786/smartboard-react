@@ -40,6 +40,7 @@ export const workEnergyTheorem: Topic = {
   slides: [
     {
       navTitle: 'Where Energy Comes From',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Work & Energy" title="WORK-ENERGY THEOREM" part="PART 01" />
@@ -75,6 +76,7 @@ export const workEnergyTheorem: Topic = {
     },
     {
       navTitle: 'The Theorem',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · The Rule" title="THE THEOREM" part="PART 02" />
@@ -110,6 +112,7 @@ export const workEnergyTheorem: Topic = {
     },
     {
       navTitle: 'Energy Transfer',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Example 7.3" title="ENERGY TRANSFER" part="PART 03" />

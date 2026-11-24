@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react'
+import { useSlide } from './SlideContext'
 import './slide.css'
 
 type KwColor = 'cyan' | 'yellow' | 'coral' | 'emerald'
@@ -105,11 +106,28 @@ export const DiagramCard = ({
 }: {
   children: ReactNode
   style?: CSSProperties
-}) => (
-  <div className="diagram-card" style={style}>
-    {children}
-  </div>
-)
+}) => {
+  const { image, imageSlot } = useSlide()
+  // When this slide is an image slot and an image is uploaded, the image fills
+  // the diagram box (and reflows with it across formats); otherwise the authored
+  // diagram shows as usual.
+  if (imageSlot === 'diagram' && image?.src && !image.deleted) {
+    const media: CSSProperties = {
+      objectFit: image.fit ?? 'cover',
+      objectPosition: `${image.cropX ?? 50}% ${image.cropY ?? 50}%`,
+    }
+    return (
+      <div className="diagram-card diagram-card--media" style={style}>
+        <img className="diagram-card-media" src={image.src} alt="" style={media} />
+      </div>
+    )
+  }
+  return (
+    <div className="diagram-card" style={style}>
+      {children}
+    </div>
+  )
+}
 
 export const DiagramCaption = ({ children }: { children: ReactNode }) => (
   <div className="diagram-caption">{children}</div>

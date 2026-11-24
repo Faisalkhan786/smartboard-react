@@ -38,6 +38,7 @@ export const lever: Topic = {
   slides: [
     {
       navTitle: 'What is a Lever?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Simple Machines" title="LEVER" part="PART 01" />
@@ -76,6 +77,7 @@ export const lever: Topic = {
     },
     {
       navTitle: 'Law of the Lever',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Principle of Moments" title="LAW OF THE LEVER" part="PART 02" />

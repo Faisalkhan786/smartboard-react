@@ -18,13 +18,13 @@
 .ch-content {
   position: relative;
   z-index: 1;
-  max-width: 820px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 28px 24px 60px;
+  padding: 20px 24px 60px;
 }
 
 /* ---- centered hero (same style as studio "Pick a chapter") ---- */
-.ch-hero { text-align: center; margin-bottom: 36px; }
+.ch-hero { text-align: center; margin-bottom: 22px; }
 .ch-hero-crumb { font-size: 12.5px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.02em; }
 .ch-hero-crumb b { color: var(--accent-cyan); font-weight: 700; }
 .ch-hero-title {

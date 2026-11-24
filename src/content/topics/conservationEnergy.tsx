@@ -35,6 +35,7 @@ export const conservationEnergy: Topic = {
   slides: [
     {
       navTitle: 'The Big Idea',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Work & Energy" title="CONSERVATION OF ENERGY" part="PART 01" />
@@ -132,6 +133,7 @@ export const conservationEnergy: Topic = {
     },
     {
       navTitle: 'The Pendulum',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · A Swing of Energy" title="THE PENDULUM" part="PART 04" />

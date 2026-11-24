@@ -36,6 +36,7 @@ export const inclinedPlane: Topic = {
   slides: [
     {
       navTitle: 'What is an Inclined Plane?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Simple Machines" title="INCLINED PLANE" part="PART 01" />
@@ -72,6 +73,7 @@ export const inclinedPlane: Topic = {
     },
     {
       navTitle: 'Why It’s Easier',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Inclined Plane" title="WHY IT'S EASIER" part="PART 02" />
@@ -105,6 +107,7 @@ export const inclinedPlane: Topic = {
     },
     {
       navTitle: 'Mechanical Advantage',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Concept" title="MECHANICAL ADVANTAGE" part="PART 03" />

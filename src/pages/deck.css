@@ -244,6 +244,8 @@
 .icon-row .ui-btn { flex: 1; }
 .icon-btn { justify-content: center; padding: 8px 0; font-size: 16px; line-height: 1; }
 .icon-btn.sm { flex: 0 0 30px; font-size: 12px; font-weight: 800; padding: 7px 0; }
+/* compact Center Image buttons (upload / move / lock / crop / trash) */
+.img-icon-row .icon-btn { padding: 5px 0; font-size: 14px; }
 
 .slide-list-wrap { position: relative; }
 .slide-list {
@@ -377,6 +379,20 @@
   transition: opacity 0.12s ease;
 }
 .tip-pop.show { opacity: 1; }
+
+/* blank-slide image placement (None / Top / Full) + slot fit — kept compact */
+.img-mode-row { display: flex; align-items: center; gap: 4px; margin: 1px 0 6px; }
+.img-mode-lab { font-size: 9px; font-weight: 700; letter-spacing: 0.04em; color: var(--text-muted); margin-right: 1px; }
+.img-mode-btn { flex: 1; font-family: inherit; font-size: 10px; font-weight: 700; color: var(--text-muted); background: rgba(148, 163, 184, 0.08); border: 1px solid var(--border-subtle); border-radius: 7px; padding: 3px 4px; cursor: pointer; transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
+.img-mode-btn:hover { color: #fff; }
+.img-mode-btn.active { color: #fff; background: color-mix(in srgb, var(--accent-cyan) 20%, transparent); border-color: color-mix(in srgb, var(--accent-cyan) 50%, transparent); }
+.slot-fit { margin-top: 6px; padding: 6px 8px; border-radius: 8px; background: rgba(148, 163, 184, 0.06); border: 1px solid rgba(148, 163, 184, 0.14); }
+.slot-fit .img-mode-row { margin: 0; }
+.slot-fit .slider-row { margin-top: 5px; }
+/* upload + delete icons share one row with the Fit toggle */
+.slot-fit-top { display: flex; align-items: center; gap: 6px; }
+.slot-ibtn { flex: 0 0 auto; width: 34px; padding: 5px 0; font-size: 14px; }
+.slot-fit-toggle { flex: 1; }
 
 /* Floating controls — only shown on mobile, where the sidebar is hidden */
 .deck-mobile-back,

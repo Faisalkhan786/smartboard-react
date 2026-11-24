@@ -69,6 +69,7 @@ export const simpleMachine: Topic = {
     },
     {
       navTitle: 'Load & Effort',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Core Terms" title="LOAD & EFFORT" part="PART 02" />

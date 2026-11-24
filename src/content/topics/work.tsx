@@ -40,6 +40,7 @@ export const work: Topic = {
   slides: [
     {
       navTitle: 'What is Work?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Work & Energy" title="WORK" part="PART 01" />
@@ -103,6 +104,7 @@ export const work: Topic = {
     },
     {
       navTitle: 'When is Work Zero?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Special Case" title="WHEN IS WORK ZERO?" part="PART 03" />
@@ -141,6 +143,7 @@ export const work: Topic = {
     },
     {
       navTitle: 'Positive & Negative',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Sign of Work" title="POSITIVE & NEGATIVE" part="PART 04" />

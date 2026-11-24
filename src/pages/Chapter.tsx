@@ -45,7 +45,7 @@ export default function Chapter() {
         {/* centered hero — matches studio "Pick a chapter" */}
         <header className="ch-hero">
           <div className="ch-hero-crumb">
-            <b>Chapter {chapterNo}</b> · {chapter?.kicker ?? 'Class 9 Physics'}
+            <b>Chapter {chapterNo}</b>
           </div>
           <h1 className="ch-hero-title">{chapter?.title ?? 'Chapter'}</h1>
           <p className="ch-hero-sub">

@@ -36,6 +36,7 @@ export const movablePulley: Topic = {
   slides: [
     {
       navTitle: 'What is a Movable Pulley?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Pulley" title="MOVABLE PULLEY" part="PART 01" />
@@ -70,6 +71,7 @@ export const movablePulley: Topic = {
     },
     {
       navTitle: 'Single Rope · T = E',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Build-Up" title="SINGLE ROPE · T = E" part="PART 02" />
@@ -105,6 +107,7 @@ export const movablePulley: Topic = {
     },
     {
       navTitle: 'Tension · 2T = W',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Step 1" title="TENSION · 2T = W" part="PART 03" />
@@ -131,6 +134,7 @@ export const movablePulley: Topic = {
     },
     {
       navTitle: 'Effort = Tension · E = W/2',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Step 2" title="EFFORT = TENSION" part="PART 04" />

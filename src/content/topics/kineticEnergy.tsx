@@ -37,6 +37,7 @@ export const kineticEnergy: Topic = {
   slides: [
     {
       navTitle: 'What is Kinetic Energy?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Work & Energy" title="KINETIC ENERGY" part="PART 01" />
@@ -130,6 +131,7 @@ export const kineticEnergy: Topic = {
     },
     {
       navTitle: 'Energy At Work',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · In the Real World" title="ENERGY AT WORK" part="PART 04" />

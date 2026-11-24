@@ -35,6 +35,7 @@ export const potentialEnergy: Topic = {
   slides: [
     {
       navTitle: 'What is Potential Energy?',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Work & Energy" title="POTENTIAL ENERGY" part="PART 01" />
@@ -98,6 +99,7 @@ export const potentialEnergy: Topic = {
     },
     {
       navTitle: 'Two Kinds of PE',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · Position or Shape" title="TWO KINDS OF PE" part="PART 03" />
@@ -133,6 +135,7 @@ export const potentialEnergy: Topic = {
     },
     {
       navTitle: 'Stored → Released',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Physics · PE → KE" title="STORED → RELEASED" part="PART 04" />

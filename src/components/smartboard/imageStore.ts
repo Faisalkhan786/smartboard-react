@@ -9,6 +9,8 @@ export interface SlideImage {
   cropX?: number
   cropY?: number
   cropZoom?: number
+  /** slot-image fit: 'cover' fills the box (crop), 'contain' shows the whole image */
+  fit?: 'cover' | 'contain'
   /** tombstone: a committed image that was deleted, pending save-to-repo */
   deleted?: boolean
 }

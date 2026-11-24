@@ -51,6 +51,18 @@ export interface ToolbarProps {
   onExport: () => void
   format: FormatId
   onFormat: (f: FormatId) => void
+  /** blank (user) slide image placement: None / Top / Full */
+  isUserSlide?: boolean
+  imageMode?: 'top' | 'full'
+  onImageMode?: (m: 'top' | 'full' | null) => void
+  /** slot-image (diagram/top/full) fit + reposition controls */
+  isSlotSlide?: boolean
+  hasImage?: boolean
+  fit?: 'cover' | 'contain'
+  posX?: number
+  posY?: number
+  onFit?: (f: 'cover' | 'contain') => void
+  onPos?: (x: number, y: number) => void
   /** render as a floating drop-up panel (landscape) instead of a docked sidebar */
   floating?: boolean
   /** playing the downward close animation (landscape) */
@@ -284,20 +296,60 @@ export default function Toolbar(p: ToolbarProps) {
 
       <div>
         <div className="side-group-title">Center Image (saved per slide)</div>
-        <div className="icon-row">
-          <button className="ui-btn icon-btn" data-tip="Upload / Replace image" onClick={() => fileRef.current?.click()}>
-            <Icon name="image" size={19} />
-          </button>
-          <button className={'ui-btn icon-btn' + (p.imageEditing ? ' active' : '')} data-tip="Move / Resize image" onClick={p.onToggleImageEdit}>
-            <Icon name="move" size={19} />
-          </button>
-          <button className={'ui-btn icon-btn' + (p.ratioLocked ? ' active' : '')} data-tip={p.ratioLocked ? 'Unlock aspect ratio' : 'Lock aspect ratio'} onClick={p.onToggleRatioLock} aria-label="Toggle aspect ratio lock"><Icon name={p.ratioLocked ? 'lock' : 'unlock'} size={18} /></button>
-          <button className={'ui-btn icon-btn' + (p.cropEditing ? ' active' : '')} data-tip="Crop: drag image inside its frame" onClick={p.onToggleCrop} aria-label="Toggle crop mode"><Icon name="crop" size={18} /></button>
-          <button className="ui-btn icon-btn" data-tip="Remove image" onClick={p.onRemoveImage}>
-            <Icon name="trash" size={19} />
-          </button>
-        </div>
-        {p.cropped && (
+        {p.isUserSlide && (
+          <div className="img-mode-row">
+            <span className="img-mode-lab">Placement</span>
+            <button className={'img-mode-btn' + (!p.imageMode ? ' active' : '')} onClick={() => p.onImageMode?.(null)}>None</button>
+            <button className={'img-mode-btn' + (p.imageMode === 'top' ? ' active' : '')} onClick={() => p.onImageMode?.('top')}>Top</button>
+            <button className={'img-mode-btn' + (p.imageMode === 'full' ? ' active' : '')} onClick={() => p.onImageMode?.('full')}>Full</button>
+          </div>
+        )}
+        {p.isSlotSlide ? (
+          <div className="slot-fit">
+            <div className="slot-fit-top">
+              <button className="ui-btn icon-btn slot-ibtn" data-tip="Upload / Replace image" onClick={() => fileRef.current?.click()}>
+                <Icon name="image" size={17} />
+              </button>
+              <button className="ui-btn icon-btn slot-ibtn" data-tip="Remove image" onClick={p.onRemoveImage}>
+                <Icon name="trash" size={17} />
+              </button>
+              {p.hasImage && (
+                <div className="img-mode-row slot-fit-toggle">
+                  <span className="img-mode-lab">Fit</span>
+                  <button className={'img-mode-btn' + (p.fit !== 'contain' ? ' active' : '')} onClick={() => p.onFit?.('cover')}>Fill</button>
+                  <button className={'img-mode-btn' + (p.fit === 'contain' ? ' active' : '')} onClick={() => p.onFit?.('contain')}>Fit</button>
+                </div>
+              )}
+            </div>
+            {p.hasImage && p.fit !== 'contain' && (
+              <div style={{ marginTop: 6 }}>
+                <div className="slider-row">
+                  <span style={{ fontSize: 10, minWidth: 12 }}>X</span>
+                  <input aria-label="Reposition horizontal" type="range" min={0} max={100} value={p.posX ?? 50} onChange={(e) => p.onPos?.(Number(e.target.value), p.posY ?? 50)} />
+                </div>
+                <div className="slider-row">
+                  <span style={{ fontSize: 10, minWidth: 12 }}>Y</span>
+                  <input aria-label="Reposition vertical" type="range" min={0} max={100} value={p.posY ?? 50} onChange={(e) => p.onPos?.(p.posX ?? 50, Number(e.target.value))} />
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="icon-row img-icon-row">
+            <button className="ui-btn icon-btn" data-tip="Upload / Replace image" onClick={() => fileRef.current?.click()}>
+              <Icon name="image" size={19} />
+            </button>
+            <button className={'ui-btn icon-btn' + (p.imageEditing ? ' active' : '')} data-tip="Move / Resize image" onClick={p.onToggleImageEdit}>
+              <Icon name="move" size={19} />
+            </button>
+            <button className={'ui-btn icon-btn' + (p.ratioLocked ? ' active' : '')} data-tip={p.ratioLocked ? 'Unlock aspect ratio' : 'Lock aspect ratio'} onClick={p.onToggleRatioLock} aria-label="Toggle aspect ratio lock"><Icon name={p.ratioLocked ? 'lock' : 'unlock'} size={18} /></button>
+            <button className={'ui-btn icon-btn' + (p.cropEditing ? ' active' : '')} data-tip="Crop: drag image inside its frame" onClick={p.onToggleCrop} aria-label="Toggle crop mode"><Icon name="crop" size={18} /></button>
+            <button className="ui-btn icon-btn" data-tip="Remove image" onClick={p.onRemoveImage}>
+              <Icon name="trash" size={19} />
+            </button>
+          </div>
+        )}
+        {!p.isSlotSlide && p.cropped && (
           <div style={{ marginTop: 8, padding: '8px 10px', borderRadius: 9, background: 'rgba(148,163,184,.08)', border: '1px solid rgba(148,163,184,.14)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 10, color: 'var(--text-muted)' }}>
               <span>{p.cropEditing ? 'Drag image inside frame' : 'Crop applied'}</span>

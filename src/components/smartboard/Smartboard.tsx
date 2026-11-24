@@ -21,6 +21,8 @@ interface Props {
   inkInteractive: boolean
   settings: PenSettings
   image?: SlideImage
+  /** if set, the uploaded image fills a layout slot instead of floating as a free overlay */
+  imageSlot?: 'diagram' | 'top' | 'full'
   imageEditing: boolean
   cropEditing: boolean
   onImageChange: (d: SlideImage) => void
@@ -39,6 +41,7 @@ export default function Smartboard({
   inkInteractive,
   settings,
   image,
+  imageSlot,
   imageEditing,
   cropEditing,
   onImageChange,
@@ -115,7 +118,7 @@ export default function Smartboard({
           style={{ width: boardW, height: boardH, transform: `scale(${scale})` }}
         >
           <div className="slides-root">
-            <SlideProvider value={{ solved }}>
+            <SlideProvider value={{ solved, image, imageSlot }}>
               <div
                 key={slideKey}
                 className={'slide active' + (solved ? ' solved' : '') + (landscape ? ' landscape' : '')}
@@ -131,7 +134,9 @@ export default function Smartboard({
             </SlideProvider>
           </div>
 
-          {image && (
+          {/* Free overlay — only when the image is NOT bound to a layout slot
+              (slot images are rendered inside their frame instead). */}
+          {image && !imageSlot && (
             <ImageLayer
               data={image}
               editing={imageEditing}

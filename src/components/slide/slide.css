@@ -236,6 +236,21 @@
 
 /* ===== Diagram card ===== */
 .diagram-card { padding: 14px 12px 13px; border: 1px solid var(--border-subtle); border-radius: 16px; background: var(--card-glass); }
+/* image-slot: uploaded image/GIF fills the diagram box edge-to-edge, clipped to the card */
+.diagram-card--media { padding: 0; overflow: hidden; }
+.slide.landscape .diagram-card--media { padding: 0; }
+.diagram-card-media { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; }
+
+/* blank-slide image placements (Phase 2) */
+.user-full { flex: 1 1 auto; min-height: 0; display: flex; border-radius: 16px; overflow: hidden; }
+.user-full-media { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* in landscape a portrait 'Fit' image hugs the left (keeps the right free) instead
+   of floating centred with empty space on both sides; 'Fill' still follows sliders */
+.slide.landscape .user-full-media { object-position: left center; }
+.user-full.empty, .diagram-card--media.user-top.empty { aspect-ratio: auto; align-items: center; justify-content: center; border: 2px dashed var(--border-subtle); background: rgba(148, 163, 184, 0.04); overflow: hidden; }
+.diagram-card--media.user-top.empty { min-height: 180px; display: flex; }
+.user-top.empty { padding: 0; }
+.user-slot-hint { margin: auto; max-width: 70%; text-align: center; color: var(--text-muted); font-size: 14px; font-weight: 700; line-height: 1.5; padding: 20px; }
 .labeled-pulley { display: block; width: 100%; height: 275px; }
 .diagram-caption { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 13px; font-weight: 900; }
 .caption-dot { color: #64748b; }

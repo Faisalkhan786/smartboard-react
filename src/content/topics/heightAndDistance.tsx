@@ -48,6 +48,7 @@ export const heightAndDistance: Topic = {
   slides: [
     {
       navTitle: 'The Basic Idea',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Math · Trigonometry" title="HEIGHT & DISTANCE" part="PART 01" />
@@ -80,6 +81,7 @@ export const heightAndDistance: Topic = {
     },
     {
       navTitle: 'Elevation and Depression',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Math · Angles" title="LOOKING UP OR DOWN" part="PART 02" />
@@ -109,6 +111,7 @@ export const heightAndDistance: Topic = {
     },
     {
       navTitle: 'The Tangent Relation',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Math · Right Triangles" title="CONNECT THE SIDES" part="PART 03" />
@@ -137,6 +140,7 @@ export const heightAndDistance: Topic = {
     },
     {
       navTitle: 'Broken Tree · Will It Touch the Car?',
+      imageSlot: 'diagram',
       hidden: true,
       render: () => (
         <>
@@ -165,6 +169,7 @@ export const heightAndDistance: Topic = {
     },
     {
       navTitle: 'Worked Example · 45°',
+      imageSlot: 'diagram',
       render: () => (
         <>
           <Header kicker="Class 9 Math · Worked Example" title="FIND THE TREE'S HEIGHT" part="PART 04" />
